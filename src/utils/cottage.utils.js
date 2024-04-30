@@ -1,0 +1,106 @@
+import custimAxios from "../configs/axios.config";
+
+export const cottageUtils = {
+  getCottage: async () => {
+    const { data } = await custimAxios.get("/cottage", {
+      headers: {
+        "accept-language": localStorage.getItem("language"),
+      },
+    });
+    return data;
+  },
+  postCottage: async ({
+    comforts,
+    cottageType,
+    description,
+    mainImage,
+    images,
+    name,
+    placeId,
+    price,
+    priceWeekend,
+    regionId,
+  }) => {
+    try {
+      const formData = new FormData();
+      for (const el of comforts) {
+        formData.append("comforts", el);
+      }
+      for (const el of cottageType) {
+        formData.append("cottageType", el);
+      }
+      for (const el of images) {
+        formData.append("images", el);
+      }
+      formData.append("name", name);
+      formData.append("mainImage", mainImage);
+      formData.append("placeId", placeId);
+      formData.append("regionId", regionId);
+      formData.append("price", price);
+      formData.append("priceWeekend", priceWeekend);
+      formData.append("description", description);
+      console.log(formData.getAll("images"), formData.get("mainImage"));
+      const { data } = await custimAxios.post("cottage/add", formData);
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  addCottageImage: async ({ cottageId, image, isMainImage }) => {
+    const formData = new FormData();
+    formData.append("cottageId", cottageId);
+    formData.append("image", image);
+    formData.append("isMainImage", isMainImage);
+    const { data } = await custimAxios.post("cottage/image/add", formData);
+    return data;
+  },
+  patchCottageText: async ({
+    id,
+    comforts,
+    cottageStatus,
+    cottageType,
+    description,
+    name,
+    price,
+    priceWeekend,
+    status,
+    lattitude,
+    longitude,
+    isTop,
+  }) => {
+    const { data } = await custimAxios.patch(`/cottage/edit/${id}`, {
+      comforts: comforts,
+      cottageStatus: cottageStatus,
+      cottageType: cottageType,
+      description: description,
+      name: name,
+      price: price,
+      priceWeekend: priceWeekend,
+      status: status,
+      lattitude: lattitude,
+      longitude: longitude,
+      isTop: isTop,
+    });
+    return data;
+  },
+
+  patchCottageImage: async ({ id, image }) => {
+    const formData = new FormData();
+    formData.append("image", image);
+    formData.append("status", "active");
+
+    const { data } = await custimAxios.patch(
+      `/cottage/image/edit/${id}`,
+      formData
+    );
+    return data;
+  },
+  deleteCottageAll: async (id) => {
+    const { data } = await custimAxios.delete(`/cottage/delete/${id}`);
+    return data;
+  },
+  deleteCottageImage: async (id) => {
+    const { data } = await custimAxios.delete(`/cottage/image/delete/${id}`);
+    return data;
+  },
+};
