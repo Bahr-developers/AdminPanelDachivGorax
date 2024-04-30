@@ -13,7 +13,7 @@ const UserProfile = () => {
     <div className="container">
       <div className="row align-items-center">
         <div className="col-md-4">
-          {getSingleUser?.imge ? (
+          {getSingleUser?.image ? (
             <LazyLoadImage
               src={`${IMG_BASE_URL}${getSingleUser?.image}`}
               effect="blur"
@@ -22,7 +22,9 @@ const UserProfile = () => {
               alt="userPhoto"
             />
           ) : (
-            <PiUserCircleLight size={300} />
+            <span>
+              <PiUserCircleLight size={300} />
+            </span>
           )}
         </div>
         <div className="col-md-8">
@@ -37,6 +39,10 @@ const UserProfile = () => {
           <div className="mb-3">
             <span className="fw-bold">Username : </span>
             <span>{getSingleUser?.username}</span>
+          </div>
+          <div className="mb-3">
+            <span className="fw-bold">Password : </span>
+            <span>{getSingleUser?.password}</span>
           </div>
           <div className="mb-3">
             <span className="fw-bold">Roles : </span>
