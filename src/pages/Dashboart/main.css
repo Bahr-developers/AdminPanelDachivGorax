@@ -108,3 +108,9 @@ strong {
   border: none;
   background: transparent;
 }
+
+.userProfileImg {
+  width: 300px;
+  border-radius: 50%;
+  height: 300px;
+}

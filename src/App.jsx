@@ -19,7 +19,6 @@ import { useQueryClient } from "@tanstack/react-query";
 import Services from "./pages/Dashboart/Services";
 import Tariff from "./pages/Dashboart/Tariff";
 import UserProfile from "./pages/Dashboart/UserProfile";
-import UserCottages from "./pages/Dashboart/UserCottages";
 
 function App() {
   const queryClient = useQueryClient();
@@ -68,7 +67,6 @@ function App() {
             <Route path="services" element={<Services />} />
             <Route path="tariff" element={<Tariff />} />
             <Route path="profile" element={<UserProfile />} />
-            <Route path="usercottages" element={<UserCottages />} />
           </Route>
         </Routes>
       </LanguageContext.Provider>

@@ -46,13 +46,8 @@ const UserDropdown = () => {
           </Link>
         </li>
         <li>
-          <Link to={"usercottages"} className="dropdown-item" href="#">
-            My cottages
-          </Link>
-        </li>
-        <li>
           <button
-            className="dropdown-item text-danger d-flex gap-2 align-items-center"
+            className="dropdown-item bg-danger text-white rounded d-flex gap-2 align-items-center"
             href="#"
             onClick={handLogOut}
           >
