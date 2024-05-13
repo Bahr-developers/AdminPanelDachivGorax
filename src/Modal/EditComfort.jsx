@@ -34,7 +34,6 @@ function EditComfort(props) {
     e.preventDefault();
     editcomfort.mutate({
       id: props.id,
-      image: e.target.updeteImg.files[0],
       name: e.target.editComfort.value,
     });
   };
@@ -60,7 +59,7 @@ function EditComfort(props) {
           <div className="modal-content">
             <div className="modal-header">
               <h1 className="modal-title fs-5" id={`editModa${props.id}Label`}>
-                Edit Region
+                Edit Comfort
               </h1>
               <button
                 type="button"
@@ -86,16 +85,6 @@ function EditComfort(props) {
                         );
                       })}
                   </select>
-                </label>
-                <label className="d-block text-start">
-                  <span className="text-start d-block mb-1">
-                    Upload comfort image
-                  </span>
-                  <input
-                    type="file"
-                    name="updeteImg"
-                    className="form-control"
-                  />
                 </label>
                 <button
                   ref={editCloseBtn}

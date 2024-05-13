@@ -17,10 +17,11 @@ const EditTarif = ({ id, tariff }) => {
       queryClient.invalidateQueries({
         queryKey: [QUERY_KEYS.unusedTranslates],
       });
-      toastify.successMessage("Service muvaffaqiyati o'zgartirildi.");
+      toastify.successMessage("Tariff muvaffaqiyati o'zgartirildi.");
     },
     onError: (err) => {
       console.log(err);
+      toastify.errorMessage("Something went wrong");
     },
   });
 
@@ -30,8 +31,8 @@ const EditTarif = ({ id, tariff }) => {
     editTariff.mutate({
       id: id,
       description: e.target.description.value,
-      days: e.target.days.value,
-      price: e.target.price.value,
+      days: e.target.days.value || "",
+      price: e.target.price.value || "",
     });
   };
 

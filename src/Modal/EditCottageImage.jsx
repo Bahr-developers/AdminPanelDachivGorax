@@ -3,7 +3,6 @@ import { cottageUtils } from "../utils/cottage.utils";
 import { useRef } from "react";
 import { IMG_BASE_URL } from "../constants/img.constants";
 import toastify from "../utils/toastify";
-import DeleteAllModal from "./DeleteAllModal";
 
 //Lazy load
 import { LazyLoadImage } from "react-lazy-load-image-component";
@@ -12,6 +11,7 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import { CiEdit } from "react-icons/ci";
 import { FaUpload } from "react-icons/fa";
 import { QUERY_KEYS } from "../Query";
+import { MdDelete } from "react-icons/md";
 
 function EditCottageImage({ id, images }) {
   const mainImage = useRef(null);
@@ -47,7 +47,7 @@ function EditCottageImage({ id, images }) {
     mutationFn: cottageUtils.deleteCottageImage,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.cottages] });
-      toastify.successMessage("Success delet image");
+      toastify.successMessage("Success delete image");
     },
     onError: (err) => {
       console.log(err);
@@ -170,10 +170,13 @@ function EditCottageImage({ id, images }) {
                               className="childImage"
                               effect="blur"
                             />
-                            <DeleteAllModal
-                              deleteFunction={deletChilImage.mutate}
-                              id={e.id}
-                            />
+                            <button
+                              type="button"
+                              className="btn btn-danger"
+                              onClick={() => deletChilImage.mutate(e.id)}
+                            >
+                              <MdDelete size={25} />
+                            </button>
                           </div>
                         );
                       })}

@@ -26,6 +26,7 @@ function EditCottageType(props) {
       name: e.target.editCottageType.value,
     });
   };
+
   return (
     <div>
       <button
@@ -47,7 +48,7 @@ function EditCottageType(props) {
           <div className="modal-content">
             <div className="modal-header">
               <h1 className="modal-title fs-5" id={`editModa${props.id}Label`}>
-                Edit Region
+                Edit Cottage type
               </h1>
               <button
                 type="button"
@@ -78,6 +79,7 @@ function EditCottageType(props) {
                 </label>
                 <button
                   type="submit"
+                  data-bs-dismiss="modal"
                   className="btn-modal bg-success border-0 fs-6 fw-bold rounded-2 mt-3 text-white d-block"
                 >
                   Save changes

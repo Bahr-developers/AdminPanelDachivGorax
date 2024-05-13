@@ -15,6 +15,7 @@ import { useContext } from "react";
 import { LanguageContext } from "../../Helper/LanguageContext";
 import { multiLanguagePlace } from "../../utils/multiLanguages";
 import { QUERY_KEYS, usePlaces } from "../../Query";
+import EditPlaceImg from "../../Modal/EditPlaceImage";
 
 function Place() {
   const queryClient = useQueryClient();
@@ -62,13 +63,16 @@ function Place() {
                       <th scope="row">{i + 1}</th>
                       <td>{e.name}</td>
                       <td>
-                        <LazyLoadImage
-                          width={95}
-                          height={65}
-                          src={`${IMG_BASE_URL}${e.image}`}
-                          alt="img"
-                          effect="blur"
-                        />
+                        <div className="d-flex align-items-center gap-3">
+                          <LazyLoadImage
+                            width={95}
+                            height={65}
+                            src={`${IMG_BASE_URL}${e.image}`}
+                            alt="img"
+                            effect="blur"
+                          />
+                          <EditPlaceImg id={e.id} />
+                        </div>
                       </td>
                       <td>
                         <EditPlace id={e.id} />

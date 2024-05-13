@@ -17,18 +17,21 @@ export const comfortUtils = {
     const { data } = await custimAxios.post("comfort/add", formData);
     return data;
   },
-  patchComfort: async ({ id, image, name }) => {
-    console.log(image || undefined);
+  patchComfort: async ({ id, name }) => {
+    console.log(name);
+    const { data } = await custimAxios.patch(`comfort/edit/${id}`, { name });
+    return data;
+  },
+  editComfortImage: async ({ id, image }) => {
     const formData = new FormData();
     formData.append("image", image);
-    formData.append("name", name);
-    const { data } = await custimAxios.patch(`comfort/edit/${id}`, formData);
-
-    return data;
+    const { data } = await custimAxios.patch(
+      `comfort/edit/image/${id}`,
+      formData
+    );
   },
   deleteComfort: async (id) => {
     const { data } = await custimAxios.delete(`comfort/delete/${id}`);
-
     return data;
   },
 };

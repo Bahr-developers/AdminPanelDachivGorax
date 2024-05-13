@@ -17,10 +17,10 @@ function EditRegion(props) {
           queryKey: [QUERY_KEYS.unusedTranslates],
         }),
         queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.regions] }),
-        toastify.successMessage("Viloyat nomi muvaffaqiyatli o'zgartirildi 🙌"),
+        toastify.successMessage("Viloyat nomi muvaffaqiyatli o'zgartirildi"),
       ]),
     onError: () => {
-      toastify.errorMessage("Hatolik yuz berdi😣");
+      toastify.errorMessage("Hatolik yuz berdi");
     },
   });
 

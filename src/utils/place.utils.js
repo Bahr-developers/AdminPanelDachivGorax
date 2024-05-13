@@ -17,14 +17,17 @@ export const placeUtils = {
     const { data } = await custimAxios.post("place/add", formData);
     return data;
   },
-  patchPlace: async ({ id, image, name }) => {
+  patchPlace: async ({ id, name }) => {
+    const { data } = await custimAxios.patch(`place/edit/${id}`, { name });
+    return data;
+  },
+  editPlaceImg: async ({ id, image }) => {
     const formData = new FormData();
     formData.append("image", image);
-    formData.append("name", name);
-
-    console.log(formData.get("name"));
-    const { data } = await custimAxios.patch(`place/edit/${id}`, formData);
-    return data;
+    const { data } = await custimAxios.patch(
+      `place/edit/image/${id}`,
+      formData
+    );
   },
   deletePlace: async (id) => {
     const { data } = await custimAxios.delete(`place/delete/${id}`);

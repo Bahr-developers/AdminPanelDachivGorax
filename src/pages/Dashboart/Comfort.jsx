@@ -11,6 +11,7 @@ import { useContext } from "react";
 import { LanguageContext } from "../../Helper/LanguageContext";
 import { multiLanguageComfort } from "../../utils/multiLanguages";
 import { QUERY_KEYS, useComforts } from "../../Query";
+import EditComfortImage from "../../Modal/editComfortImage";
 
 function Comfort() {
   const queryClient = useQueryClient();
@@ -62,13 +63,16 @@ function Comfort() {
                     <th scope="row">{i + 1}</th>
                     <td className="fw-medium fs-5">{e.name}</td>
                     <td>
-                      <LazyLoadImage
-                        src={`${IMG_BASE_URL}${e.image}`}
-                        width={50}
-                        height={60}
-                        alt="img"
-                        effect="blur"
-                      />
+                      <div className="d-flex gap-3 align-items-center">
+                        <LazyLoadImage
+                          src={`${IMG_BASE_URL}${e.image}`}
+                          width={50}
+                          height={60}
+                          alt="img"
+                          effect="blur"
+                        />
+                        <EditComfortImage id={e.id} />
+                      </div>
                     </td>
                     <td>
                       <EditComfort id={e.id} />

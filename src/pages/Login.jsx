@@ -39,7 +39,8 @@ function Login() {
         window.location.reload(true);
       }, 1000);
     } catch (err) {
-      toastify.errorMessage(err?.response?.data?.message);
+      console.log(err);
+      toastify.errorMessage("Something went wrong");
     }
   };
 
