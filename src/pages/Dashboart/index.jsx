@@ -51,16 +51,10 @@ function Dashboart() {
                     name="language"
                     className="form-control fw-medium"
                     onChange={toggleLanguage}
+                    value={languageChange}
                   >
                     {language.data?.length &&
                       language.data.map((e) => {
-                        if (e.code === languageChange) {
-                          return (
-                            <option key={e.id} selected value={e.code}>
-                              {e.code}
-                            </option>
-                          );
-                        }
                         return (
                           <option key={e.id} value={e.code}>
                             {e.code}

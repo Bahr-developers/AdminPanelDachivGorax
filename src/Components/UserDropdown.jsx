@@ -28,7 +28,7 @@ const UserDropdown = () => {
         data-bs-toggle="dropdown"
         aria-expanded="false"
       >
-        {getSingleUSer?.data?.image !== "" ? (
+        {getSingleUSer?.data?.image ? (
           <LazyLoadImage
             className="userImg"
             src={`${IMG_BASE_URL}${getSingleUSer?.data?.image}`}

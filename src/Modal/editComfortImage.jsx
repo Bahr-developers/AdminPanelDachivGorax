@@ -2,9 +2,11 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { CiEdit } from "react-icons/ci";
 import toastify from "../utils/toastify";
 import { QUERY_KEYS } from "../Query";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { FaUpload } from "react-icons/fa";
 import { comfortUtils } from "../utils/comfort.utils";
+import { MdCloudUpload } from "react-icons/md";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 // Images transform getbase64Full
 async function getBase64Full(file) {
@@ -20,7 +22,8 @@ async function getBase64Full(file) {
 
 function EditComfortImage(props) {
   const queryClient = useQueryClient();
-  const image = useRef(null);
+  const [image, setImage] = useState("");
+  const [file, setFile] = useState("");
 
   const editComfortImage = useMutation({
     mutationFn: comfortUtils.editComfortImage,
@@ -29,25 +32,25 @@ function EditComfortImage(props) {
       queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.comforts] });
     },
     onError: (err) => {
-      toastify.errorMessage("Something went wrong");
+      toastify.error("Something went wrong");
       console.log("err", err);
     },
   });
 
-  const handleComfort = (e) => {
-    e.preventDefault();
-    console.log(props.id);
-    editComfortImage.mutate({
-      id: props.id,
-      image: e.target.image.files[0],
-    });
+  const handleGetFile = (e) => {
+    const files = e.target.files[0];
+    setFile(files);
+    if (files) {
+      setImage(URL.createObjectURL(files));
+    }
   };
 
-  const Image = async (e) => {
-    console.log(e.target.files);
-    image.current.src = await getBase64Full(e.target.files[0]);
-    image.current.classList.remove("d-none");
-    image.current.classList.add("d-block");
+  const handleComfort = (e) => {
+    e.preventDefault();
+    editComfortImage.mutate({
+      id: props?.id,
+      image: file,
+    });
   };
 
   return (
@@ -85,25 +88,30 @@ function EditComfortImage(props) {
             </div>
             <div className="modal-body">
               <form className="p-4" onSubmit={handleComfort}>
-                <div>
-                  <label className="file-input-label d-block mb-4 w-50">
+                <div className="d-flex align-items-center gap-5 my-4">
+                  <label className="btn btn-primary d-flex align-items-center gap-2">
+                    <MdCloudUpload size={25} />
+                    <span className="d-block">Upload Img</span>
                     <input
+                      id="uploadImg"
+                      className="d-none"
                       type="file"
-                      onChange={Image}
-                      name="image"
-                      className="file-input"
+                      name="file"
+                      onChange={handleGetFile}
                     />
-                    <FaUpload size={30} />
-                    <span>Comfort Image</span>
                   </label>
-                  <img
-                    ref={image}
-                    width={150}
-                    height={170}
-                    src=""
-                    alt="img"
-                    className="main-image d-none"
-                  />
+                  {image ? (
+                    <LazyLoadImage
+                      src={image}
+                      width={60}
+                      height={60}
+                      alt="place image"
+                      effect="blur"
+                      className="rounded"
+                    />
+                  ) : (
+                    <p className="m-0">No choosen image</p>
+                  )}
                 </div>
                 <button
                   type="submit"

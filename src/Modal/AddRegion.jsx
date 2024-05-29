@@ -74,8 +74,9 @@ function AddRegion() {
                     className="form-select mb-4"
                     name="region"
                     id="region-dash"
+                    defaultValue={"select region name"}
                   >
-                    <option value="" defaultChecked selected>
+                    <option value="select region name" disabled>
                       select region name
                     </option>
                     {unusedTranslates.data?.length &&

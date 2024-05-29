@@ -39,11 +39,9 @@ function EditPlace(props) {
 
   const handlPlace = (e) => {
     e.preventDefault();
-    console.log(e.target.editPlace.value);
-    console.log(props.id);
     editplace.mutate({
-      id: props.id,
-      name: e.target.editPlace.value,
+      id: props?.id,
+      name: e.target?.editPlace?.value,
     });
   };
 
@@ -81,8 +79,12 @@ function EditPlace(props) {
               <form className="p-4" onSubmit={handlPlace}>
                 <label className="d-block mb-3">
                   <span className="text-start d-block mb-1">Select Place</span>
-                  <select className="form-select" name="editPlace">
-                    <option value="" defaultValue selected>
+                  <select
+                    className="form-select"
+                    name="editPlace"
+                    defaultValue={"select place"}
+                  >
+                    <option value="" disabled>
                       select place
                     </option>
                     {unusedTranslates.data?.length &&

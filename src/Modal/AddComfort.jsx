@@ -1,19 +1,20 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { comfortUtils } from "../utils/comfort.utils";
 import toastify from "../utils/toastify";
-import { useContext, useRef } from "react";
+import { useContext, useRef, useState } from "react";
 import { multiAddComfort } from "../utils/multiLanguages";
 import { LanguageContext } from "../Helper/LanguageContext";
 
-// icons
-import { FaUpload } from "react-icons/fa";
-
 import { QUERY_KEYS, useUnusedTranslates } from "../Query";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import { MdCloudUpload } from "react-icons/md";
 
 function AddComfort() {
   const addComfortBtn = useRef(null);
 
   const queryClient = useQueryClient();
+  const [image, setImage] = useState("");
+  const [file, setFile] = useState("");
 
   // get ununusedTranslates
   const unusedTranslates = useUnusedTranslates();
@@ -28,7 +29,7 @@ function AddComfort() {
       queryClient.invalidateQueries({
         queryKey: [QUERY_KEYS.unusedTranslates],
       });
-      toastify.successMessage("Qo'shish muvaffaqiyat amalga oshirildi 🙌");
+      toastify.successMessage("Qo'shish muvaffaqiyatli amalga oshirildi");
     },
     onError: (err) => {
       toastify.errorMessage(err.message);
@@ -36,11 +37,20 @@ function AddComfort() {
     },
   });
 
+  // handle get image
+  const handleGetFile = (e) => {
+    const files = e.target.files[0];
+    setFile(files);
+    if (files) {
+      setImage(URL.createObjectURL(files));
+    }
+  };
+
   const handlComforts = (e) => {
     e.preventDefault();
     addComfort.mutate({
       name: e.target.comfort.value,
-      image: e.target.comfortImg.files[0],
+      image: file,
     });
   };
 
@@ -81,8 +91,12 @@ function AddComfort() {
               <form className="p-4" onSubmit={handlComforts}>
                 <label className="d-block">
                   <span className="d-block mb-1">Enter comfort</span>
-                  <select name="comfort" className="form-select">
-                    <option value="" defaultValue selected>
+                  <select
+                    name="comfort"
+                    className="form-select"
+                    defaultValue={"select comfort"}
+                  >
+                    <option value="" disabled>
                       select comfort
                     </option>
                     {unusedTranslates.data?.length &&
@@ -95,16 +109,31 @@ function AddComfort() {
                       })}
                   </select>
                 </label>
-                <label className="file-input-label mt-3">
-                  <input
-                    type="file"
-                    name="comfortImg"
-                    id="comfort-img"
-                    className="file-input"
-                  />
-                  <FaUpload size={25} />
-                  <span>Upload Img</span>
-                </label>
+                <div className="d-flex align-items-center gap-5 my-4">
+                  <label className="btn btn-primary d-flex align-items-center gap-2">
+                    <MdCloudUpload size={25} />
+                    <span className="d-block">Upload Img</span>
+                    <input
+                      id="uploadImg"
+                      className="d-none"
+                      type="file"
+                      name="file"
+                      onChange={handleGetFile}
+                    />
+                  </label>
+                  {image ? (
+                    <LazyLoadImage
+                      src={image}
+                      width={60}
+                      height={60}
+                      alt="place image"
+                      effect="blur"
+                      className="rounded"
+                    />
+                  ) : (
+                    <p className="m-0">No choosen image</p>
+                  )}
+                </div>
                 <button
                   ref={addComfortBtn}
                   type="submit"

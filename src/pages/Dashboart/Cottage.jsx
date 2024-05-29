@@ -132,7 +132,7 @@ function Cottage() {
                               key={e.id}
                               className="comforts d-flex align-items-centr gap-2"
                             >
-                              <img
+                              <LazyLoadImage
                                 width={20}
                                 height={20}
                                 src={`${IMG_BASE_URL}${e.image}`}

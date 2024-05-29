@@ -102,8 +102,12 @@ const AddService = () => {
               <form className="p-4" onSubmit={handleSubmit}>
                 <label className="d-block mb-4">
                   <span className="d-block mb-1">Select name</span>
-                  <select name="name" className="form-select ">
-                    <option defaultValue selected disabled>
+                  <select
+                    name="name"
+                    className="form-select"
+                    defaultValue={"Select name"}
+                  >
+                    <option value={""} disabled>
                       Select name
                     </option>
                     {unusedTranslates.data?.length &&
@@ -119,8 +123,12 @@ const AddService = () => {
 
                 <label className="d-block mb-4">
                   <span className="d-block mb-1">Select description</span>
-                  <select name="description" className="form-select">
-                    <option defaultValue disabled selected>
+                  <select
+                    name="description"
+                    className="form-select"
+                    defaultValue={"Select description"}
+                  >
+                    <option value={""} disabled>
                       Select description
                     </option>
                     {unusedTranslates.data?.length &&
@@ -136,8 +144,12 @@ const AddService = () => {
 
                 <label className="d-block mb-4">
                   <span className="d-block mb-1">Select service code</span>
-                  <select name="code" className="form-select">
-                    <option defaultValue disabled selected>
+                  <select
+                    name="code"
+                    className="form-select"
+                    defaultValue={"Select service code"}
+                  >
+                    <option defaultValue disabled>
                       Select service code
                     </option>
                     {SERVICE_CODES?.length &&

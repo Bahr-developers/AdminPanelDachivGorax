@@ -5,9 +5,13 @@ import toastify from "../utils/toastify";
 import { CiEdit } from "react-icons/ci";
 import { IoMdCloudUpload } from "react-icons/io";
 import { QUERY_KEYS, useRoles } from "../Query";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import { MdCloudUpload } from "react-icons/md";
 
 function EditUser({ user }) {
   const queryClient = useQueryClient();
+  const [image, setImage] = useState("");
+  const [file, setFile] = useState("");
 
   const [perRoles, setPerRoles] = useState({
     rolesChack: [...user?.roles],
@@ -44,6 +48,14 @@ function EditUser({ user }) {
     }
   };
 
+  const handleGetFile = (e) => {
+    const files = e.target.files[0];
+    setFile(files);
+    if (files) {
+      setImage(URL.createObjectURL(files));
+    }
+  };
+
   const handlEditUser = (e) => {
     e.preventDefault();
     editUser.mutate({
@@ -54,8 +66,7 @@ function EditUser({ user }) {
       phone: e.target.phonenumber.value,
       roles: perRoles.response,
       email: e.target.email.value,
-      favoriteCottages: "",
-      image: e.target.userImg.files[0],
+      image: file || "",
     });
   };
 
@@ -141,11 +152,31 @@ function EditUser({ user }) {
                     placeholder="demo@email.com"
                   />
                 </label>
-                <label className="file-input-label mt-3">
-                  <input type="file" name="userImg" className="file-input" />
-                  <IoMdCloudUpload size={25} />
-                  <span>User Img</span>
-                </label>
+                <div className="d-flex align-items-center gap-5 my-4">
+                  <label className="btn btn-primary d-flex align-items-center gap-2">
+                    <MdCloudUpload size={25} />
+                    <span className="d-block">Upload Img</span>
+                    <input
+                      id={`uploadImg${user.id}`}
+                      className="d-none"
+                      type="file"
+                      name="file"
+                      onChange={handleGetFile}
+                    />
+                  </label>
+                  {image ? (
+                    <LazyLoadImage
+                      src={image}
+                      width={60}
+                      height={60}
+                      alt="place image"
+                      effect="blur"
+                      className="rounded"
+                    />
+                  ) : (
+                    <p className="m-0">No choosen image</p>
+                  )}
+                </div>
                 <h4 className="mt-2">Roles: </h4>
                 <div className="roles-wrap px-3">
                   {role.data?.length &&
@@ -156,14 +187,14 @@ function EditUser({ user }) {
                           className="d-flex gap-2 align-items-center mt-4"
                         >
                           <input
-                            className="chakbox"
+                            className="chakbox form-check-input"
                             type="checkbox"
                             name={e.id}
                             value={e.id}
                             onChange={handlRole}
-                            defaultChecked={perRoles.rolesChack.some(
-                              (el) => el?.role?.id == e.id
-                            )}
+                            defaultChecked={perRoles.rolesChack.some((el) => {
+                              el?.role?.id == e.id;
+                            })}
                           />
                           <span className="d-block fw-medium">{e.name}</span>
                         </label>

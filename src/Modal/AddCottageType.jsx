@@ -73,8 +73,9 @@ function AddCottageType() {
                     className="form-select mb-4"
                     name="cottageType"
                     id="region-dash"
+                    defaultValue={"select cottage type"}
                   >
-                    <option value="" defaultValue selected>
+                    <option value="" disabled>
                       select cottage type
                     </option>
                     {unusedTranslates.data?.length &&

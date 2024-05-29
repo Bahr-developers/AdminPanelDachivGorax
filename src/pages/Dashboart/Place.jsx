@@ -71,7 +71,7 @@ function Place() {
                             alt="img"
                             effect="blur"
                           />
-                          <EditPlaceImg id={e.id} />
+                          <EditPlaceImg place={e} />
                         </div>
                       </td>
                       <td>

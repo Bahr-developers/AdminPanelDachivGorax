@@ -2,12 +2,17 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { placeUtils } from "../utils/place.utils";
 import toastify from "../utils/toastify";
 import { multiAddPlace } from "../utils/multiLanguages";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { LanguageContext } from "../Helper/LanguageContext";
 import { QUERY_KEYS, useRegion, useUnusedTranslates } from "../Query";
 
+import { MdCloudUpload } from "react-icons/md";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+
 function AddPlace() {
   const queryClient = useQueryClient();
+  const [image, setImage] = useState("");
+  const [file, setFile] = useState("");
 
   // get region
   const region = useRegion();
@@ -24,7 +29,7 @@ function AddPlace() {
           queryKey: [QUERY_KEYS.places],
         }),
         queryClient.invalidateQueries(QUERY_KEYS.unusedTranslates),
-        toastify.successMessage("Joy nomi muvaffaqiyatli qo'shildi 🙌"),
+        toastify.successMessage("Joy  muvaffaqiyatli qo'shildi"),
       ]);
     },
     onError: (err) => {
@@ -33,11 +38,20 @@ function AddPlace() {
     },
   });
 
+  // get Image
+  const handleChange = (e) => {
+    const files = e.target.files[0];
+    setFile(files);
+    if (files) {
+      setImage(URL.createObjectURL(files));
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     addPlace.mutate({
       name: e.target.placaname.value,
-      image: e.target.file.files[0],
+      image: file,
       regionId: e.target.region.value,
     });
   };
@@ -79,8 +93,12 @@ function AddPlace() {
               <form className="p-4" onSubmit={handleSubmit}>
                 <label className="d-block mb-2">
                   <span className="d-block">Select place name</span>
-                  <select name="placaname" className="form-select">
-                    <option value="" defaultValue selected>
+                  <select
+                    name="placaname"
+                    className="form-select"
+                    defaultValue="select place name"
+                  >
+                    <option value="select place name" disabled>
                       select place name
                     </option>
                     {unusedTranslates.data?.length &&
@@ -95,8 +113,12 @@ function AddPlace() {
                 </label>
                 <label className="d-block mb-3">
                   <span className="d-block">Select Region</span>
-                  <select className="form-select" name="region">
-                    <option value="" defaultValue selected>
+                  <select
+                    className="form-select"
+                    name="region"
+                    defaultValue={"select region name"}
+                  >
+                    <option value="select region name" disabled>
                       select region name
                     </option>
                     {region.data?.length &&
@@ -109,14 +131,35 @@ function AddPlace() {
                       })}
                   </select>
                 </label>
-                <label className="d-block mb-3">
-                  <span className="d-block mb-1">Upload Img</span>
-                  <input
-                    className="p-1 w-100 d-block form-control"
-                    type="file"
-                    name="file"
-                  />
-                </label>
+                <div className="d-flex align-items-center gap-5 mb-4">
+                  <label
+                    htmlFor="uploadImg"
+                    className="btn btn-primary d-inline-flex align-items-center gap-2"
+                  >
+                    <MdCloudUpload size={25} />
+                    <span className="d-block">Upload Img</span>
+                    <input
+                      id="uploadImg"
+                      className="d-none"
+                      type="file"
+                      name="file"
+                      onChange={handleChange}
+                    />
+                  </label>
+                  {image ? (
+                    <LazyLoadImage
+                      src={image}
+                      width={60}
+                      height={60}
+                      alt="place image"
+                      effect="blur"
+                      className="rounded"
+                    />
+                  ) : (
+                    <p className="m-0">No choosen image</p>
+                  )}
+                </div>
+
                 <button
                   type="submit"
                   data-bs-dismiss="modal"

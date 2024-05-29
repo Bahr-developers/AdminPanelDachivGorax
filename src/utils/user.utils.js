@@ -14,7 +14,7 @@ export const userUtils = {
     return data;
   },
   postUser: async ({ password, phone, roles, username }) => {
-    const { data } = custimAxios.post("user/add", {
+    const { data } = await custimAxios.post("user/add", {
       password: password,
       phone: phone,
       roles: roles,
@@ -25,7 +25,6 @@ export const userUtils = {
   patchUser: async ({
     id,
     email,
-    favoriteCottages,
     image,
     name,
     password,
@@ -35,7 +34,6 @@ export const userUtils = {
   }) => {
     const formData = new FormData();
     formData.append("email", email);
-    formData.append("favoriteCottages", favoriteCottages);
     formData.append("image", image);
     formData.append("name", name);
     formData.append("password", password);
@@ -44,6 +42,7 @@ export const userUtils = {
       formData.append("roles", role);
     }
     formData.append("username", username);
+    console.log(formData);
     const { data } = await custimAxios.patch(`user/edit/${id}`, formData);
     return data;
   },

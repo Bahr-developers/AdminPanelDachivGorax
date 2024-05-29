@@ -63,8 +63,12 @@ function EditCottageType(props) {
                   <span className="d-block text-start mb-1">
                     Edit cottage type
                   </span>
-                  <select className="form-select" name="editCottageType">
-                    <option value="" defaultValue selected>
+                  <select
+                    className="form-select"
+                    name="editCottageType"
+                    defaultValue={"select cottage type"}
+                  >
+                    <option value="" disabled>
                       select cottage type
                     </option>
                     {unusedTranslates.data?.length &&

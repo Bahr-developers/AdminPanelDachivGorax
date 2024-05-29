@@ -94,8 +94,12 @@ const EditService = ({ id }) => {
               <form onSubmit={handleSubmit}>
                 <label className="d-block mb-3">
                   <span className="d-block mb-1">Edit Service name</span>
-                  <select className="form-select" name="serviceName">
-                    <option defaultValue value="" selected>
+                  <select
+                    className="form-select"
+                    name="serviceName"
+                    defaultValue={"select service name"}
+                  >
+                    <option value="" disabled>
                       select service name
                     </option>
                     {unusedTranslates.data?.length &&
@@ -111,10 +115,12 @@ const EditService = ({ id }) => {
 
                 <label className="d-block mb-3">
                   <span className="d-block mb-1">Edit description</span>
-                  <select name="serviceDescription" className="form-select">
-                    <option defaultValue disabled selected>
-                      Select description
-                    </option>
+                  <select
+                    name="serviceDescription"
+                    className="form-select"
+                    defaultValue={"Select description"}
+                  >
+                    <option disabled>Select description</option>
                     {unusedTranslates.data?.length &&
                       unusedTranslates.data.map((e) => {
                         return (

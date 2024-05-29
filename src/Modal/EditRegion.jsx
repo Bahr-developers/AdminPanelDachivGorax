@@ -66,8 +66,12 @@ function EditRegion(props) {
               <form className="p-4" onSubmit={patchRegion}>
                 <label className="d-block">
                   <span className="d-block mb-1 text-start">Select Region</span>
-                  <select className="form-select" name="editRegion">
-                    <option value="" defaultValue selected>
+                  <select
+                    className="form-select"
+                    name="editRegion"
+                    defaultValue="select region"
+                  >
+                    <option value={"select region"} disabled>
                       select region
                     </option>
                     {unusedTranslates.data?.length &&

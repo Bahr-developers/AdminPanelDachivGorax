@@ -27,6 +27,7 @@ import {
   usePlaces,
   useRegion,
 } from "../Query";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 function AddCottage() {
   const cottageCloseBtn = useRef(null);
@@ -247,11 +248,15 @@ function AddCottage() {
                     className="form-select"
                     name="region"
                     aria-label="Default select example"
+                    defaultValue={"select cottage region"}
                   >
+                    <option value="select cottage region" disabled>
+                      select cottage region
+                    </option>
                     {region.data?.length &&
                       region.data.map((e) => {
                         return (
-                          <option key={e.id} selected value={e.id}>
+                          <option key={e.id} value={e.id}>
                             {e.name}
                           </option>
                         );
@@ -264,7 +269,11 @@ function AddCottage() {
                     className="form-select"
                     name="place"
                     aria-label="Default select example"
+                    defaultValue={"select place"}
                   >
+                    <option value="select place" disabled>
+                      select cottage place
+                    </option>
                     {place.data?.length &&
                       place.data.map((e) => {
                         return (
@@ -303,7 +312,10 @@ function AddCottage() {
                   {comforts.data?.length &&
                     comforts.data.map((e) => {
                       return (
-                        <div className="addnew-object  gap-2" key={e.id}>
+                        <label
+                          className="addnew-object cursor-pointer  gap-2"
+                          key={e.id}
+                        >
                           <input
                             className="form-check-input"
                             type="checkbox"
@@ -311,9 +323,14 @@ function AddCottage() {
                             value={e.id}
                             onChange={handleCottageComforts}
                           />
-                          <img src={`${IMG_BASE_URL}${e.image}`} alt="img" />
+                          <LazyLoadImage
+                            src={`${IMG_BASE_URL}${e.image}`}
+                            alt="comforts image"
+                            width={20}
+                            height={20}
+                          />
                           <p className="addnew-object-text mb-0">{e.name}</p>
-                        </div>
+                        </label>
                       );
                     })}
                 </div>

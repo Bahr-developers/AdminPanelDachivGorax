@@ -3,24 +3,14 @@ import { CiEdit } from "react-icons/ci";
 import { placeUtils } from "../utils/place.utils";
 import toastify from "../utils/toastify";
 import { QUERY_KEYS } from "../Query";
-import { useRef } from "react";
-import { FaUpload } from "react-icons/fa";
+import { useState } from "react";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import { MdCloudUpload } from "react-icons/md";
 
-// Images transform getbase64Full
-async function getBase64Full(file) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => {
-      resolve(reader.result);
-    };
-    reader.onerror = reject;
-  });
-}
-
-function EditPlaceImg(props) {
+function EditPlaceImg({ place }) {
   const queryClient = useQueryClient();
-  const image = useRef(null);
+  const [image, setImage] = useState("");
+  const [file, setFile] = useState("");
 
   const editPlaceImg = useMutation({
     mutationFn: placeUtils.editPlaceImg,
@@ -34,20 +24,20 @@ function EditPlaceImg(props) {
     },
   });
 
-  const handlPlace = (e) => {
-    e.preventDefault();
-    console.log(props.id);
-    editPlaceImg.mutate({
-      id: props.id,
-      image: e.target.image.files[0],
-    });
+  const handleGetFile = (e) => {
+    const files = e.target.files[0];
+    setFile(files);
+    if (files) {
+      setImage(URL.createObjectURL(files));
+    }
   };
 
-  const Image = async (e) => {
-    console.log(e.target.files);
-    image.current.src = await getBase64Full(e.target.files[0]);
-    image.current.classList.remove("d-none");
-    image.current.classList.add("d-block");
+  const handlPlace = (e) => {
+    e.preventDefault();
+    editPlaceImg.mutate({
+      id: place?.id,
+      image: file,
+    });
   };
 
   return (
@@ -56,21 +46,21 @@ function EditPlaceImg(props) {
         type="button"
         className="btn btn-success"
         data-bs-toggle="modal"
-        data-bs-target={`#editPlaceImage${props.id}`}
+        data-bs-target={`#editPlaceImage${place.id}`}
       >
         <CiEdit size={25} />
       </button>
       <div
         className="modal fade"
-        id={`editPlaceImage${props.id}`}
+        id={`editPlaceImage${place.id}`}
         tabIndex="-1"
-        aria-labelledby={`editPlaceImage${props.id}Label`}
+        aria-labelledby={`editPlaceImage${place.id}Label`}
         aria-hidden="true"
       >
         <div className="modal-dialog">
           <div className="modal-content">
             <div className="modal-header">
-              <h1 className="modal-title fs-5" id={`editModa${props.id}Label`}>
+              <h1 className="modal-title fs-5" id={`editModa${place.id}Label`}>
                 Edit Place Image
               </h1>
               <button
@@ -82,25 +72,30 @@ function EditPlaceImg(props) {
             </div>
             <div className="modal-body">
               <form className="p-4" onSubmit={handlPlace}>
-                <div>
-                  <label className="file-input-label d-block mb-4 w-50">
+                <div className="d-flex align-items-center gap-5 mb-4">
+                  <label className="btn btn-primary d-flex align-items-center gap-2">
+                    <MdCloudUpload size={25} />
+                    <span className="d-block">Upload Img</span>
                     <input
+                      id="uploadImg"
+                      className="d-none"
                       type="file"
-                      onChange={Image}
-                      name="image"
-                      className="file-input"
+                      name="file"
+                      onChange={handleGetFile}
                     />
-                    <FaUpload size={30} />
-                    <span>Place Image</span>
                   </label>
-                  <img
-                    ref={image}
-                    width={150}
-                    height={170}
-                    src=""
-                    alt="img"
-                    className="main-image d-none"
-                  />
+                  {image ? (
+                    <LazyLoadImage
+                      src={image}
+                      width={60}
+                      height={60}
+                      alt="place image"
+                      effect="blur"
+                      className="rounded"
+                    />
+                  ) : (
+                    <p className="m-0">No choosen image</p>
+                  )}
                 </div>
                 <button
                   type="submit"

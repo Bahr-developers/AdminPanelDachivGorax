@@ -11,6 +11,7 @@ import {
   usePlaces,
   useRegion,
 } from "../Query";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 function EditCottage({ id, cottage }) {
   const cottageTypeUset = [];
@@ -195,10 +196,13 @@ function EditCottage({ id, cottage }) {
                     aria-label="Default select example"
                     defaultValue={cottage.region.id}
                   >
+                    <option value="" disabled>
+                      select cottage region
+                    </option>
                     {region.data?.length &&
                       region.data.map((e) => {
                         return (
-                          <option key={e.id} selected value={e.id}>
+                          <option key={e.id} value={e.id}>
                             {e.name}
                           </option>
                         );
@@ -306,7 +310,12 @@ function EditCottage({ id, cottage }) {
                             value={e.id}
                             onChange={handleCottageComforts}
                           />
-                          <img src={`${IMG_BASE_URL}${e.image}`} alt="img" />
+                          <LazyLoadImage
+                            src={`${IMG_BASE_URL}${e.image}`}
+                            alt="img"
+                            width={20}
+                            height={20}
+                          />
                           <p className="mb-0">{e.name}</p>
                         </label>
                       );

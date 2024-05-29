@@ -10,7 +10,7 @@ export const translateUtils = {
     return data;
   },
   getTranslateId: async (id) => {
-    const { data } = custimAxios.get(`translate/${id}`);
+    const { data } = await custimAxios.get(`translate/${id}`);
     return data;
   },
   postTranslate: async ({ code, definition, type }) => {
@@ -26,7 +26,7 @@ export const translateUtils = {
     return data;
   },
   deleteTranslate: async (id) => {
-    const { data } = custimAxios.delete(`translate/${id}`);
+    const { data } = await custimAxios.delete(`translate/${id}`);
     return data;
   },
 };

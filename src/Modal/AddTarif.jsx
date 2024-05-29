@@ -79,8 +79,12 @@ const AddTarif = () => {
               <form className="p-4" onSubmit={handleSubmit}>
                 <label className="d-block  mb-3">
                   <span className="d-block">Select Type</span>
-                  <select name="type" className="form-control">
-                    <option defaultValue selected disabled>
+                  <select
+                    name="type"
+                    className="form-control"
+                    defaultValue={"Select type"}
+                  >
+                    <option value="" disabled>
                       Select type
                     </option>
                     {unusedTranslates.data?.length &&
@@ -96,8 +100,12 @@ const AddTarif = () => {
 
                 <label className="d-block mb-3">
                   <span className="d-block">Select description</span>
-                  <select name="description" className="form-control ">
-                    <option defaultValue disabled selected>
+                  <select
+                    name="description"
+                    className="form-control"
+                    defaultValue={"Select description"}
+                  >
+                    <option value="" disabled>
                       Select description
                     </option>
                     {unusedTranslates.data?.length &&
@@ -113,8 +121,12 @@ const AddTarif = () => {
 
                 <label className="d-block mb-3">
                   <span className="d-block">Select service</span>
-                  <select name="serviceId" className="form-control ">
-                    <option defaultValue disabled selected>
+                  <select
+                    name="serviceId"
+                    className="form-control"
+                    defaultValue={"Select service"}
+                  >
+                    <option value={""} disabled>
                       Select service
                     </option>
                     {service.data?.length &&

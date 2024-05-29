@@ -28,6 +28,7 @@ function Users() {
     },
     onError: (err) => {
       toastify.errorMessage(err);
+      console.log(err);
     },
   });
 
@@ -82,7 +83,11 @@ function Users() {
                     <td>
                       {el.roles?.length &&
                         el.roles.map((e) => {
-                          return <h5 key={e.role.id}>{e.role.name}</h5>;
+                          return (
+                            <p className="fs-5" key={e.role.name}>
+                              {e.role.name}
+                            </p>
+                          );
                         })}
                     </td>
                     <td>{el.balance === null ? "-" : el.balance}</td>

@@ -71,8 +71,12 @@ const EditTarif = ({ id, tariff }) => {
               <form className="p-4" onSubmit={handleSubmit}>
                 <label className="d-block mb-3">
                   <span className="d-block">Edit tariff description</span>
-                  <select name="description" className="form-control ">
-                    <option value="" selected defaultValue>
+                  <select
+                    name="description"
+                    className="form-control"
+                    defaultValue={"select tariff description"}
+                  >
+                    <option value="" disabled>
                       select tariff description
                     </option>
                     {unusedTranslates.data?.length &&

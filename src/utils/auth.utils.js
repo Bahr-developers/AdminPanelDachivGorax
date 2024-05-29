@@ -9,10 +9,6 @@ export const authUtils = {
     });
     return data;
   },
-  smsAuth: async (phone) => {
-    const { data } = await custimAxios.post("/auth/login/sms", phone);
-    return data;
-  },
   refreshAuth: async () => {
     const { data } = await custimAxios.post(
       "/auth/refresh",

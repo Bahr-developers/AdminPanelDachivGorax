@@ -72,8 +72,12 @@ function EditComfort(props) {
               <form className="p-4" onSubmit={handlComfort}>
                 <label className="d-block mb-3">
                   <span className="d-block mb-1 text-start">Edit comfort</span>
-                  <select className="form-control" name="editComfort">
-                    <option value="" selected defaultValue>
+                  <select
+                    className="form-control"
+                    name="editComfort"
+                    defaultValue={"select comfort"}
+                  >
+                    <option value="" disabled>
                       select comfort
                     </option>
                     {unusedTranslates.data?.length &&
