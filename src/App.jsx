@@ -19,6 +19,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import Services from "./pages/Dashboart/Services";
 import Tariff from "./pages/Dashboart/Tariff";
 import UserProfile from "./pages/Dashboart/UserProfile";
+import PageNotFound from "./pages/PageNotFound";
 
 function App() {
   const queryClient = useQueryClient();
@@ -68,6 +69,7 @@ function App() {
             <Route path="tariff" element={<Tariff />} />
             <Route path="profile" element={<UserProfile />} />
           </Route>
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
       </LanguageContext.Provider>
     </div>
