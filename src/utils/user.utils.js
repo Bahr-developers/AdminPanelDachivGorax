@@ -42,7 +42,6 @@ export const userUtils = {
       formData.append("roles", role);
     }
     formData.append("username", username);
-    console.log(formData);
     const { data } = await custimAxios.patch(`user/edit/${id}`, formData);
     return data;
   },

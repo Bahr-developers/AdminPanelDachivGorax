@@ -2,24 +2,26 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { languageUtils } from "../utils/language.utils";
 import { CiEdit } from "react-icons/ci";
 import { QUERY_KEYS } from "../Query";
+import { toast } from "react-toastify";
 
-function EditLanguage(props) {
+function EditLanguage({ language }) {
   const queryClient = useQueryClient();
 
   const editLanguage = useMutation({
     mutationFn: languageUtils.pachtLanguage,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.languages] });
+      toast.success("Til muvaffaqiyatli o'zgartirildi");
     },
     onError: (e) => {
-      alert(e.message);
+      toast.success("Something went wrong");
     },
   });
 
   const patchLanguage = (e) => {
     e.preventDefault();
     editLanguage.mutate({
-      id: props.id,
+      id: language.id,
       title: e.target.title.value,
     });
   };
@@ -30,15 +32,15 @@ function EditLanguage(props) {
         type="button"
         className="btn btn-success"
         data-bs-toggle="modal"
-        data-bs-target={`#editModal${props?.id}`}
+        data-bs-target={`#editModal${language?.id}`}
       >
         <CiEdit size={25} />
       </button>
       <div
         className="modal fade"
-        id={`editModal${props?.id}`}
+        id={`editModal${language?.id}`}
         tabIndex="-1"
-        aria-labelledby={`editModal${props?.id}Label`}
+        aria-labelledby={`editModal${language?.id}Label`}
         aria-hidden="true"
       >
         <div className="modal-dialog">
@@ -46,7 +48,7 @@ function EditLanguage(props) {
             <div className="modal-header">
               <h1
                 className="modal-title fs-5"
-                id={`editModal${props?.id}Label`}
+                id={`editModal${language?.id}Label`}
               >
                 Edit Language
               </h1>
@@ -68,6 +70,7 @@ function EditLanguage(props) {
                     type="text"
                     name="title"
                     placeholder="ex: O`zbek tili"
+                    defaultValue={language?.title}
                   />
                 </label>
                 <button

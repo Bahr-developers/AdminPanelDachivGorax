@@ -95,6 +95,7 @@ function AddComfort() {
                     name="comfort"
                     className="form-select"
                     defaultValue={"select comfort"}
+                    required
                   >
                     <option value="" disabled>
                       select comfort

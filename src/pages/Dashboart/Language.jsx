@@ -61,7 +61,7 @@ function Language() {
                     <td>{e.code}</td>
                     <td>{e.title}</td>
                     <td>
-                      <EditLanguage id={e.id} />
+                      <EditLanguage language={e} />
                     </td>
                     <td>
                       <DeleteAllModal

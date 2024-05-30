@@ -75,6 +75,7 @@ function AddLanguage() {
                     name="code"
                     placeholder="ex: uz"
                     required
+                    maxLength={2}
                   />
                 </label>
                 <label className="w-100 d-block mb-4">

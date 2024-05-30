@@ -140,7 +140,6 @@ function EditUser({ user }) {
                     className="form-control"
                     name="phonenumber"
                     placeholder="97 123 45 68"
-                    defaultValue={user?.phone}
                   />
                 </label>
                 <label className="d-block mb-2">
