@@ -12,6 +12,7 @@ import { LanguageContext } from "../../Helper/LanguageContext";
 import { multiLanguageComfort } from "../../utils/multiLanguages";
 import { QUERY_KEYS, useComforts } from "../../Query";
 import EditComfortImage from "../../Modal/editComfortImage";
+import { Helmet } from "react-helmet-async";
 
 function Comfort() {
   const queryClient = useQueryClient();
@@ -39,62 +40,67 @@ function Comfort() {
   if (comforts.isLoading) return <Loading />;
 
   return (
-    <div className="comforts">
-      <div className="language-haed d-flex justify-content-between">
-        <h2>{multiLanguageComfort.maintitle[languageChange]}</h2>
-        <AddComfort />
-      </div>
-      <div className="language-inner">
-        {comforts.data?.length ? (
-          <table className="table text-center table-bordered">
-            <thead>
-              <tr>
-                {multiLanguageComfort.tableHead.map((head) => (
-                  <th scope="col" key={head.id}>
-                    {head.title[languageChange]}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {comforts.data.map((e, i) => {
-                return (
-                  <tr key={e.id}>
-                    <th scope="row">{i + 1}</th>
-                    <td className="fw-medium fs-5">{e.name}</td>
-                    <td>
-                      <div className="d-flex gap-3 align-items-center">
-                        <LazyLoadImage
-                          src={`${IMG_BASE_URL}${e.image}`}
-                          width={50}
-                          height={60}
-                          alt="img"
-                          effect="blur"
+    <>
+      <Helmet>
+        <title>Admin Panel | Comforts</title>
+      </Helmet>
+      <div className="comforts">
+        <div className="language-haed d-flex justify-content-between">
+          <h2>{multiLanguageComfort.maintitle[languageChange]}</h2>
+          <AddComfort />
+        </div>
+        <div className="language-inner">
+          {comforts.data?.length ? (
+            <table className="table text-center table-bordered">
+              <thead>
+                <tr>
+                  {multiLanguageComfort.tableHead.map((head) => (
+                    <th scope="col" key={head.id}>
+                      {head.title[languageChange]}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {comforts.data.map((e, i) => {
+                  return (
+                    <tr key={e.id}>
+                      <th scope="row">{i + 1}</th>
+                      <td className="fw-medium fs-5">{e.name}</td>
+                      <td>
+                        <div className="d-flex gap-3 align-items-center">
+                          <LazyLoadImage
+                            src={`${IMG_BASE_URL}${e.image}`}
+                            width={50}
+                            height={60}
+                            alt="img"
+                            effect="blur"
+                          />
+                          <EditComfortImage id={e.id} />
+                        </div>
+                      </td>
+                      <td>
+                        <EditComfort id={e.id} />
+                      </td>
+                      <td>
+                        <DeleteAllModal
+                          deleteFunction={deletComfort.mutate}
+                          id={e.id}
                         />
-                        <EditComfortImage id={e.id} />
-                      </div>
-                    </td>
-                    <td>
-                      <EditComfort id={e.id} />
-                    </td>
-                    <td>
-                      <DeleteAllModal
-                        deleteFunction={deletComfort.mutate}
-                        id={e.id}
-                      />
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        ) : (
-          <div>
-            <h3 className="text-xl mt-4">There is no comfort</h3>
-          </div>
-        )}
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          ) : (
+            <div>
+              <h3 className="text-xl mt-4">There is no comfort</h3>
+            </div>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

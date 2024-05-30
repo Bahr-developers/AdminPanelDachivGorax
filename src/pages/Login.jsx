@@ -11,6 +11,7 @@ import { useState } from "react";
 //logo
 import adminLogo from "../assets/AdminLogo.jpg";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import { Helmet } from "react-helmet-async";
 
 function Login() {
   const navigate = useNavigate();
@@ -52,56 +53,63 @@ function Login() {
   };
 
   return (
-    <div id="loginWrapper">
-      <div className="loginCover">
-        <div className="login ml-auto rounded-4  mx-auto">
-          <div className="text-center mb-3">
-            <LazyLoadImage
-              src={adminLogo}
-              alt="logo"
-              className="w-25 rounded-circle"
-              effect="blur"
-            />
-          </div>
-          <h2 className="fs-2 fw-bold text-center text-white">Dachi v gorax</h2>
-          <form className="mx-auto  mt-5" onSubmit={userLogin}>
-            <label className="fs-4 w-100 fw-medium text-white">
-              Username
-              <input
-                name="username"
-                type="text"
-                className="form-control  w-100 p-2 rounded-2 fs-5 border mt-1 text-black-50 d-block"
-                placeholder="Enter username"
+    <>
+      <Helmet>
+        <title>Admin Panel | Login</title>
+      </Helmet>
+      <div id="loginWrapper">
+        <div className="loginCover">
+          <div className="login ml-auto rounded-4  mx-auto">
+            <div className="text-center mb-3">
+              <LazyLoadImage
+                src={adminLogo}
+                alt="logo"
+                className="w-25 rounded-circle"
+                effect="blur"
               />
-            </label>
-            <label className="fs-4 d-block mt-4 w-100 fw-medium text-white position-relative">
-              <span>Password</span>
-              <input
-                name="password"
-                type={eyeBtn}
-                className="form-control input-password w-100 text-black-50 p-2 rounded-2 border mt-1 d-block fs-5 pe-5"
-                placeholder="Enter password"
-              />
+            </div>
+            <h2 className="fs-2 fw-bold text-center text-white">
+              Dachi v gorax
+            </h2>
+            <form className="mx-auto  mt-5" onSubmit={userLogin}>
+              <label className="fs-4 w-100 fw-medium text-white">
+                Username
+                <input
+                  name="username"
+                  type="text"
+                  className="form-control  w-100 p-2 rounded-2 fs-5 border mt-1 text-black-50 d-block"
+                  placeholder="Enter username"
+                />
+              </label>
+              <label className="fs-4 d-block mt-4 w-100 fw-medium text-white position-relative">
+                <span>Password</span>
+                <input
+                  name="password"
+                  type={eyeBtn}
+                  className="form-control input-password w-100 text-black-50 p-2 rounded-2 border mt-1 d-block fs-5 pe-5"
+                  placeholder="Enter password"
+                />
+                <button
+                  type="button"
+                  className="eyeBtn text-black-50"
+                  onClick={hideShowPassword}
+                >
+                  {eyeBtn === "password" ? <FaEye /> : <FaEyeSlash />}
+                </button>
+              </label>
               <button
-                type="button"
-                className="eyeBtn text-black-50"
-                onClick={hideShowPassword}
+                type="submit"
+                className="mt-5 p-2 w-100 text-center d-block fs-5 fw-bold  border-0 text-white btn btn-primary"
               >
-                {eyeBtn === "password" ? <FaEye /> : <FaEyeSlash />}
+                LOG IN
               </button>
-            </label>
-            <button
-              type="submit"
-              className="mt-5 p-2 w-100 text-center d-block fs-5 fw-bold  border-0 text-white btn btn-primary"
-            >
-              LOG IN
-            </button>
-          </form>
-        </div>
+            </form>
+          </div>
 
-        <Outlet />
+          <Outlet />
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

@@ -12,6 +12,7 @@ import Loading from "../../Components/Loading/Loading";
 import { useContext } from "react";
 import { LanguageContext } from "../../Helper/LanguageContext";
 import { multiLanguageServices } from "../../utils/multiLanguages";
+import { Helmet } from "react-helmet-async";
 
 const Services = () => {
   const queryClient = useQueryClient();
@@ -40,70 +41,75 @@ const Services = () => {
   if (services.isLoading) return <Loading />;
 
   return (
-    <div className="services">
-      <div className="language-haed d-flex justify-content-between">
-        <h2>{multiLanguageServices.maintitle[languageChange]}</h2>
-        <AddService />
+    <>
+      <Helmet>
+        <title>Admin Panel | Services</title>
+      </Helmet>
+      <div className="services">
+        <div className="language-haed d-flex justify-content-between">
+          <h2>{multiLanguageServices.maintitle[languageChange]}</h2>
+          <AddService />
+        </div>
+        <div className="language-inner">
+          {services.data?.length ? (
+            <table className="table  table-bordered">
+              <thead>
+                <tr>
+                  {multiLanguageServices.tableHead.map((head) => (
+                    <th className="col" key={head.id}>
+                      {head.title[languageChange]}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {services.data?.length &&
+                  services.data.map((el, i) => {
+                    return (
+                      <tr key={el.id}>
+                        <td>{i + 1}</td>
+                        <td>{el.name}</td>
+                        <td>
+                          {el.images.map((img, i) => {
+                            return (
+                              <LazyLoadImage
+                                src={`${IMG_BASE_URL}${img}`}
+                                key={i}
+                                className="d-block mb-2"
+                                width={100}
+                                height={100}
+                              />
+                            );
+                          })}
+                        </td>
+                        <td>
+                          <span className="bg-success p-2 text-white rounded ">
+                            {el.serviceCode}
+                          </span>
+                        </td>
+                        <td>{el.description}</td>
+                        <td>
+                          <EditService id={el.id} />
+                        </td>
+                        <td>
+                          <DeleteAllModal
+                            deleteFunction={deleteService.mutate}
+                            id={el.id}
+                          />
+                        </td>
+                      </tr>
+                    );
+                  })}
+              </tbody>
+            </table>
+          ) : (
+            <div>
+              <h3>There is no services</h3>
+            </div>
+          )}
+        </div>
       </div>
-      <div className="language-inner">
-        {services.data?.length ? (
-          <table className="table  table-bordered">
-            <thead>
-              <tr>
-                {multiLanguageServices.tableHead.map((head) => (
-                  <th className="col" key={head.id}>
-                    {head.title[languageChange]}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {services.data?.length &&
-                services.data.map((el, i) => {
-                  return (
-                    <tr key={el.id}>
-                      <td>{i + 1}</td>
-                      <td>{el.name}</td>
-                      <td>
-                        {el.images.map((img, i) => {
-                          return (
-                            <LazyLoadImage
-                              src={`${IMG_BASE_URL}${img}`}
-                              key={i}
-                              className="d-block mb-2"
-                              width={100}
-                              height={100}
-                            />
-                          );
-                        })}
-                      </td>
-                      <td>
-                        <span className="bg-success p-2 text-white rounded ">
-                          {el.serviceCode}
-                        </span>
-                      </td>
-                      <td>{el.description}</td>
-                      <td>
-                        <EditService id={el.id} />
-                      </td>
-                      <td>
-                        <DeleteAllModal
-                          deleteFunction={deleteService.mutate}
-                          id={el.id}
-                        />
-                      </td>
-                    </tr>
-                  );
-                })}
-            </tbody>
-          </table>
-        ) : (
-          <div>
-            <h3>There is no services</h3>
-          </div>
-        )}
-      </div>
-    </div>
+    </>
   );
 };
 

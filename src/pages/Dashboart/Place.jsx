@@ -16,6 +16,7 @@ import { LanguageContext } from "../../Helper/LanguageContext";
 import { multiLanguagePlace } from "../../utils/multiLanguages";
 import { QUERY_KEYS, usePlaces } from "../../Query";
 import EditPlaceImg from "../../Modal/EditPlaceImage";
+import { Helmet } from "react-helmet-async";
 
 function Place() {
   const queryClient = useQueryClient();
@@ -38,64 +39,69 @@ function Place() {
   if (place.isLoading) return <Loading />;
 
   return (
-    <div>
-      <div className="place">
-        <div className="place-haed d-flex justify-content-between">
-          <h2>{multiLanguagePlace.maintitle[languageChange]}</h2>
-          <AddPlace />
-        </div>
-        <div className="language-inner">
-          {place.data?.length ? (
-            <table className="table mt-4 text-center table-bordered">
-              <thead>
-                <tr>
-                  {multiLanguagePlace.tableHead.map((head) => (
-                    <th scope="col" key={head.id}>
-                      {head.title[languageChange]}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {place.data.map((e, i) => {
-                  return (
-                    <tr key={e.id}>
-                      <th scope="row">{i + 1}</th>
-                      <td>{e.name}</td>
-                      <td>
-                        <div className="d-flex align-items-center gap-3">
-                          <LazyLoadImage
-                            width={95}
-                            height={65}
-                            src={`${IMG_BASE_URL}${e.image}`}
-                            alt="img"
-                            effect="blur"
+    <>
+      <Helmet>
+        <title>Admin Panel | Place</title>
+      </Helmet>
+      <div>
+        <div className="place">
+          <div className="place-haed d-flex justify-content-between">
+            <h2>{multiLanguagePlace.maintitle[languageChange]}</h2>
+            <AddPlace />
+          </div>
+          <div className="language-inner">
+            {place.data?.length ? (
+              <table className="table mt-4 text-center table-bordered">
+                <thead>
+                  <tr>
+                    {multiLanguagePlace.tableHead.map((head) => (
+                      <th scope="col" key={head.id}>
+                        {head.title[languageChange]}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {place.data.map((e, i) => {
+                    return (
+                      <tr key={e.id}>
+                        <th scope="row">{i + 1}</th>
+                        <td>{e.name}</td>
+                        <td>
+                          <div className="d-flex align-items-center gap-3">
+                            <LazyLoadImage
+                              width={95}
+                              height={65}
+                              src={`${IMG_BASE_URL}${e.image}`}
+                              alt="img"
+                              effect="blur"
+                            />
+                            <EditPlaceImg place={e} />
+                          </div>
+                        </td>
+                        <td>
+                          <EditPlace id={e.id} />
+                        </td>
+                        <td>
+                          <DeleteAllModal
+                            deleteFunction={delePlace.mutate}
+                            id={e.id}
                           />
-                          <EditPlaceImg place={e} />
-                        </div>
-                      </td>
-                      <td>
-                        <EditPlace id={e.id} />
-                      </td>
-                      <td>
-                        <DeleteAllModal
-                          deleteFunction={delePlace.mutate}
-                          id={e.id}
-                        />
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          ) : (
-            <div>
-              <h3 className="mt-4 text-xl">There is no place</h3>
-            </div>
-          )}
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            ) : (
+              <div>
+                <h3 className="mt-4 text-xl">There is no place</h3>
+              </div>
+            )}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

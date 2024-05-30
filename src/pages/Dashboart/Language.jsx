@@ -11,6 +11,7 @@ import { useContext } from "react";
 import { LanguageContext } from "../../Helper/LanguageContext";
 import { multiLanguagePage } from "../../utils/multiLanguages";
 import { QUERY_KEYS, useLanguage } from "../../Query";
+import { Helmet } from "react-helmet-async";
 
 function Language() {
   const queryClient = useQueryClient();
@@ -36,51 +37,56 @@ function Language() {
   if (languages.isLoading) return <Loading />;
 
   return (
-    <div className="language">
-      <div className="language-haed d-flex justify-content-between">
-        <h2>{multiLanguagePage.maintitle[languageChange]}</h2>
-        <AddLanguage />
+    <>
+      <Helmet>
+        <title>Admin Panel | Languages</title>
+      </Helmet>
+      <div className="language">
+        <div className="language-haed d-flex justify-content-between">
+          <h2>{multiLanguagePage.maintitle[languageChange]}</h2>
+          <AddLanguage />
+        </div>
+        <div className="language-inner">
+          {languages?.data?.length ? (
+            <table className="table table-bordered text-center">
+              <thead>
+                <tr>
+                  {multiLanguagePage.tableHead.map((head) => (
+                    <th scope="col" key={head.id}>
+                      {head.title[languageChange]}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {languages.data.map((e, i) => {
+                  return (
+                    <tr key={e.id}>
+                      <th scope="row">{i + 1}</th>
+                      <td>{e.code}</td>
+                      <td>{e.title}</td>
+                      <td>
+                        <EditLanguage language={e} />
+                      </td>
+                      <td>
+                        <DeleteAllModal
+                          deleteFunction={deleteLanguage.mutate}
+                          id={e.id}
+                        />
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          ) : (
+            <div>
+              <h3 className="text-xl mt-4">there is no language</h3>
+            </div>
+          )}
+        </div>
       </div>
-      <div className="language-inner">
-        {languages?.data?.length ? (
-          <table className="table table-bordered text-center">
-            <thead>
-              <tr>
-                {multiLanguagePage.tableHead.map((head) => (
-                  <th scope="col" key={head.id}>
-                    {head.title[languageChange]}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {languages.data.map((e, i) => {
-                return (
-                  <tr key={e.id}>
-                    <th scope="row">{i + 1}</th>
-                    <td>{e.code}</td>
-                    <td>{e.title}</td>
-                    <td>
-                      <EditLanguage language={e} />
-                    </td>
-                    <td>
-                      <DeleteAllModal
-                        deleteFunction={deleteLanguage.mutate}
-                        id={e.id}
-                      />
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        ) : (
-          <div>
-            <h3 className="text-xl mt-4">there is no language</h3>
-          </div>
-        )}
-      </div>
-    </div>
+    </>
   );
 }
 

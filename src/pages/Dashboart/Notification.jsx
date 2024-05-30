@@ -14,6 +14,7 @@ import {
 } from "../../utils/multiLanguages";
 
 import { QUERY_KEYS, useNotifications, useUsers } from "../../Query";
+import { Helmet } from "react-helmet-async";
 
 function Notification() {
   const [isTrue, setIsTrue] = useState(true);
@@ -45,11 +46,11 @@ function Notification() {
     mutationFn: notificationUtils.deleteNatification,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.notifications] });
-      toastify.successMessage("Habarnoma o'chirildi ");
+      toastify.successMessage("Xabarnoma o'chirildi ");
     },
     onError: (err) => {
       console.log(err);
-      toastify.errorMessage("Hatolik mavjud😣");
+      toastify.errorMessage("Xatolik mavjud");
     },
   });
 
@@ -60,6 +61,9 @@ function Notification() {
 
   return (
     <>
+      <Helmet>
+        <title>Admina Panel | Notifications</title>
+      </Helmet>
       <div className="notification-wrap">
         <div className="public-noti">
           <div className="notif-haed d-flex justify-content-between">
