@@ -172,6 +172,7 @@ const AddService = () => {
                       name="serviceImages"
                       className="file-input"
                       multiple
+                      accept="image/*"
                     />
                     <FaUpload size={25} />
                     <span> Images </span>

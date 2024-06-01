@@ -51,11 +51,15 @@ const EditService = ({ id }) => {
   // on submit
   const handleSubmit = (e) => {
     e.preventDefault();
+    const images = [];
+    for (let i = 0; i < e.target.serviceImages.files.length; i++) {
+      images.push(e.target.serviceImages.files[i]);
+    }
     editService.mutate({
       id: id,
       name: e.target.serviceName.value,
       description: e.target.serviceDescription.value,
-      images: e.target.serviceImages.files,
+      serviceImages: images,
     });
   };
 
@@ -99,9 +103,7 @@ const EditService = ({ id }) => {
                     name="serviceName"
                     defaultValue={"select service name"}
                   >
-                    <option value="" disabled>
-                      select service name
-                    </option>
+                    <option value="">select service name</option>
                     {unusedTranslates.data?.length &&
                       unusedTranslates.data.map((e) => {
                         return (
@@ -120,7 +122,7 @@ const EditService = ({ id }) => {
                     className="form-select"
                     defaultValue={"Select description"}
                   >
-                    <option disabled>Select description</option>
+                    <option value={""}>Select description</option>
                     {unusedTranslates.data?.length &&
                       unusedTranslates.data.map((e) => {
                         return (
@@ -141,6 +143,7 @@ const EditService = ({ id }) => {
                       name="serviceImages"
                       className="file-input"
                       multiple
+                      accept="image/*"
                     />
                     <FaUpload size={25} />
                     <span> Images </span>
