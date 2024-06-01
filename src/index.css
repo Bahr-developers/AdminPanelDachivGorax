@@ -9,7 +9,6 @@
 
 .aside-dashboart {
   max-width: 350px;
-  height: 100vh;
   background-color: #2b2a4c;
   padding: 20px;
   text-align: center;
@@ -22,7 +21,7 @@
 }
 .main-dashboart {
   width: 100%;
-  height: 100vh;
+  height: 110vh;
   overflow-y: scroll;
   background-color: #ffff;
   padding: 20px;

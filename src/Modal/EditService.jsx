@@ -52,7 +52,6 @@ const EditService = ({ id }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     editService.mutate({
-      id: id,
       name: e.target.serviceName.value,
       description: e.target.serviceDescription.value,
       images: e.target.serviceImages.files,
@@ -138,6 +137,7 @@ const EditService = ({ id }) => {
                     <input
                       onChange={handlmultipleImg}
                       type="file"
+                      accept="image/*"
                       name="serviceImages"
                       className="file-input"
                       multiple

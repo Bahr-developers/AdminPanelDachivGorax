@@ -33,10 +33,7 @@ export const serviceUtils = {
         formData.append("images", img);
       }
 
-      const { data } = await custimAxios.patch(
-        `/services/edit/${id}`,
-        formData
-      );
+      const { data } = await custimAxios.patch(`/services/edit/${id}`,formData);
       return data;
     } catch (e) {
       console.log(e);
