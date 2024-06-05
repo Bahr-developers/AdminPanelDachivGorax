@@ -169,6 +169,7 @@ const AddService = () => {
                     <input
                       onChange={handlmultipleImg}
                       type="file"
+                      accept="image/*"
                       name="serviceImages"
                       className="file-input"
                       multiple

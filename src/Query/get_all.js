@@ -13,6 +13,7 @@ import { translateUtils } from "../utils/translate.utils";
 import { modelsUtils } from "../utils/models.utils";
 import { serviceUtils } from "../utils/service.utils";
 import { tariffUtils } from "../utils/tariff.utils";
+import { OrderUtils } from "../utils/order.utils";
 
 const useComforts = () => {
   return useQuery({
@@ -119,7 +120,15 @@ const useSingleUser = () => {
   });
 };
 
+const useOrderAdmin = () => {
+  return useQuery({
+    queryKey: [QUERY_KEYS.order],
+    queryFn: OrderUtils.getOrderAdmin
+  })
+}
+
 export {
+  useOrderAdmin,
   useComforts,
   useCottage,
   useCottageType,

@@ -133,6 +133,7 @@ function EditCottageImage({ id, images }) {
                     <input
                       onChange={handleMainImage}
                       type="file"
+                      accept="image/*"
                       name="mainImage"
                       id="cottage-main-img"
                       className="file-input"
@@ -146,6 +147,7 @@ function EditCottageImage({ id, images }) {
                     <input
                       onChange={addChildImg}
                       type="file"
+                      accept="image/*"
                       name="childimg"
                       id="cottage-main-img"
                       className="file-input"

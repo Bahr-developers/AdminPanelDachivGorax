@@ -20,6 +20,7 @@ import Services from "./pages/Dashboart/Services";
 import Tariff from "./pages/Dashboart/Tariff";
 import UserProfile from "./pages/Dashboart/UserProfile";
 import PageNotFound from "./pages/PageNotFound";
+import Order from "./pages/Dashboart/Order";
 
 function App() {
   const queryClient = useQueryClient();
@@ -67,6 +68,7 @@ function App() {
             <Route path="user" element={<Users />} />
             <Route path="services" element={<Services />} />
             <Route path="tariff" element={<Tariff />} />
+            <Route path="order" element={<Order />} />
             <Route path="profile" element={<UserProfile />} />
           </Route>
           <Route path="*" element={<PageNotFound />} />

@@ -185,6 +185,7 @@ function AddCottage() {
                     <input
                       onChange={isMainImage}
                       type="file"
+                      accept="image/*"
                       name="mainImage"
                       id="cottage-main-img"
                       className="file-input"
@@ -206,6 +207,7 @@ function AddCottage() {
                     <input
                       onChange={handlmultipleImg}
                       type="file"
+                      accept="image/*"
                       name="childimg"
                       id="cottage-main-img"
                       className="file-input"
