@@ -159,6 +159,7 @@ function EditUser({ user }) {
                       id={`uploadImg${user.id}`}
                       className="d-none"
                       type="file"
+                      accept="image/*"
                       name="file"
                       onChange={handleGetFile}
                     />

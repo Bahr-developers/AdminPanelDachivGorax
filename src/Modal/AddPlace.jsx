@@ -142,6 +142,7 @@ function AddPlace() {
                       id="uploadImg"
                       className="d-none"
                       type="file"
+                      accept="image/*"
                       name="file"
                       onChange={handleChange}
                     />

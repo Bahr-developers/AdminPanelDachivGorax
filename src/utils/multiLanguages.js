@@ -116,6 +116,15 @@ export const multilanguageLinks = [
     },
     to: "tariff",
   },
+  {
+    id: 14,
+    title: {
+      en: "Order",
+      ru: "Заказ",
+      uz: "Buyurtma",
+    },
+    to: "order",
+  },
 ];
 
 export const homePageLanguages = {
@@ -282,6 +291,79 @@ export const multiAddTranslate = {
   uz: "Tarjima",
   ru: "Переводить",
   en: "Translate",
+};
+export const multiLanguageOrder = {
+  maintitle: {
+    uz: "Buyurtma",
+    ru: "Заказ",
+    en: "Order",
+  },
+  tableHead: [
+    {
+      id: 1,
+      title: {
+        uz: "#",
+        ru: "#",
+        en: "#",
+      },
+    },
+    {
+      id: 2,
+      title: {
+        uz: "Dacha",
+        ru: "Дача",
+        en: "Cottage",
+      },
+    },
+    {
+      id: 3,
+      title: {
+        uz: "Foydalanuvchi",
+        ru: "Пользователь",
+        en: "User",
+      },
+    },
+    {
+      id: 4,
+      title: {
+        uz: "Tarif",
+        ru: "Тариф",
+        en: "Tariff",
+      },
+    },
+    {
+      id: 5,
+      title: {
+        uz: "Buyurtma holasi",
+        ru: "Статус заказа",
+        en: "Order status",
+      },
+    },
+    {
+      id: 6,
+      title: {
+        uz: "Status",
+        ru: "Положение дел",
+        en: "Status",
+      },
+    },
+    {
+      id: 7,
+      title: {
+        uz: "O'zgartirish",
+        ru: "Редактировать",
+        en: "Edit",
+      },
+    },
+    {
+      id: 8,
+      title: {
+        uz: "O'chirish",
+        ru: "Удалить",
+        en: "Delete",
+      },
+    },
+  ],
 };
 
 export const multiLanguageRegion = {

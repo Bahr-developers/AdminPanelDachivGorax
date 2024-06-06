@@ -56,7 +56,6 @@ const EditService = ({ id }) => {
       images.push(e.target.serviceImages.files[i]);
     }
     editService.mutate({
-      id: id,
       name: e.target.serviceName.value,
       description: e.target.serviceDescription.value,
       serviceImages: images,
@@ -140,6 +139,7 @@ const EditService = ({ id }) => {
                     <input
                       onChange={handlmultipleImg}
                       type="file"
+                      accept="image/*"
                       name="serviceImages"
                       className="file-input"
                       multiple

@@ -31,10 +31,7 @@ export const serviceUtils = {
 
       serviceImages.forEach((img) => formData.append("images", img));
 
-      const { data } = await custimAxios.patch(
-        `/services/edit/${id}`,
-        formData
-      );
+      const { data } = await custimAxios.patch(`/services/edit/${id}`,formData);
       return data;
     } catch (err) {
       console.log(err);

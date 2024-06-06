@@ -119,6 +119,7 @@ function AddComfort() {
                       className="d-none"
                       type="file"
                       name="file"
+                      accept="image/*"
                       onChange={handleGetFile}
                     />
                   </label>
