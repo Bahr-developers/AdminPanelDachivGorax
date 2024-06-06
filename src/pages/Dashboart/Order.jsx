@@ -60,7 +60,7 @@ const Order = () => {
                                             <td>
                                             <button
                                                     className={
-                                                        e.orderStatus === "cancelled"
+                                                        e.orderStatus === "cancelled" 
                                                             ? "bg-danger ds-6 text-white btn btn-group fw-medium"
                                                             : e.orderStatus==="success" ? "bg-success text-white btn btn-group fw-medium" :"bg-warning text-white btn btn-group fw-medium"
                                                     }

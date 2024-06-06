@@ -14,4 +14,5 @@ export const QUERY_KEYS = {
   unusedTranslates: "unusedTranslates",
   models: "models",
   useSingleUser: "useSingleUser",
+  order: "orders"
 };

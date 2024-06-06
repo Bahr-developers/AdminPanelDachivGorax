@@ -26,7 +26,8 @@ export const OrderUtils = {
     editOrder: async ({orderId, orderStatus, status}) => {
         const {data} = await custimAxios.patch(`order/update/${orderId}`, {
             orderId,
-            status
+            status,
+            orderStatus
         }, 
      {
         headers: {

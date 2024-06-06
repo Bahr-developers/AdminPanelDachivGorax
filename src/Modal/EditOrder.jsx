@@ -1,8 +1,33 @@
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import React from 'react';
 import { CiEdit } from 'react-icons/ci';
+import { OrderUtils } from '../utils/order.utils';
+import { QUERY_KEYS } from '../Query';
+import { toast } from 'react-toastify';
 
 const EditOrder = (props) => {
-    console.log(props.status);
+    const queryClient = useQueryClient()
+    const editOrder = useMutation({
+        mutationFn: OrderUtils.editOrder,
+        onSuccess:  () => {
+            queryClient.invalidateQueries({queryKey: [QUERY_KEYS.order]})
+            toast.success("Success order")
+        },
+        onError: (err) => {
+            console.log(err);
+            toast.error("Error order")
+        }
+    })
+
+    const handelOrderEdit = (e) => {
+        e.preventDefault()
+        editOrder.mutate({
+            orderId: props?.id,
+            orderStatus: e.target.orderStatus.value,
+            status: e.target.status.value
+        })
+        console.log(editOrder);
+    }
 
     return (
         <div>
@@ -35,7 +60,7 @@ const EditOrder = (props) => {
                             ></button>
                         </div>
                         <div className="modal-body">
-                            <form className="p-4">
+                            <form className="p-4" onSubmit={handelOrderEdit}>
                                 <label className="d-block">
                                     <span className="d-block mb-1 text-start">Order Status</span>
                                     <select
