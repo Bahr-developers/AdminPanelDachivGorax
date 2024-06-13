@@ -649,14 +649,6 @@ export const multiLanguageCottage = {
       },
     },
     {
-      id: 9,
-      title: {
-        uz: "isTop",
-        ru: "isTop",
-        en: "isTop",
-      },
-    },
-    {
       id: 10,
       title: {
         uz: "Narxi",
