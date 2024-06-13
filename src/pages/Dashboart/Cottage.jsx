@@ -103,7 +103,7 @@ function Cottage() {
                           }
                         >
                           {el.cottageStatus}
-                        </p>{" "}
+                        </p>
                       </td>
                       <th>
                         <p
@@ -114,17 +114,6 @@ function Cottage() {
                           }
                         >
                           {el.status}
-                        </p>
-                      </th>
-                      <th>
-                        <p
-                          className={
-                            el.isTop
-                              ? "p-1 bg-success text-white rounded text-center"
-                              : "p-1 bg-danger text-white rounded"
-                          }
-                        >
-                          {String(el.isTop)}
                         </p>
                       </th>
                       <td>{el.price}</td>
