@@ -156,7 +156,7 @@ function Cottage() {
             </table>
           ) : (
             <div>
-              <h3 className="text-xl mt-4">There is no cottage yet:(</h3>
+              <h3 className="text-xl mt-4">There is no cottage yet ⚠️</h3>
             </div>
           )}
         </div>

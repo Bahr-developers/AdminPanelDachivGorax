@@ -81,7 +81,7 @@ function Language() {
             </table>
           ) : (
             <div>
-              <h3 className="text-xl mt-4">there is no language</h3>
+              <h3 className="text-xl mt-4">There is no language yet ⚠️</h3>
             </div>
           )}
         </div>

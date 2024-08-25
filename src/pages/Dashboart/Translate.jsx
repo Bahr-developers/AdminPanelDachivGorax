@@ -108,7 +108,7 @@ function Translate() {
             </table>
           ) : (
             <div>
-              <h3 className="text-xl mt-4">There is no translate</h3>
+              <h3 className="text-xl mt-4">There is no translate yet ⚠️</h3>
             </div>
           )}
         </div>

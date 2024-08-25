@@ -113,7 +113,7 @@ function Notification() {
               </table>
             ) : (
               <div>
-                <h3 className="mt-4">There is no notification yet :(</h3>
+                <h3 className="mt-4">There is no notification yet ⚠️</h3>
               </div>
             )}
           </div>
@@ -172,7 +172,7 @@ function Notification() {
               </table>
             ) : (
               <div>
-                <h3 className="mt-4">There is no notification yet :(</h3>
+                <h3 className="mt-4">There is no notification yet ⚠️</h3>
               </div>
             )}
           </div>

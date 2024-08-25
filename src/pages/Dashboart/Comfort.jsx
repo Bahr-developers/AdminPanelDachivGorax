@@ -95,7 +95,7 @@ function Comfort() {
             </table>
           ) : (
             <div>
-              <h3 className="text-xl mt-4">There is no comfort</h3>
+              <h3 className="text-xl mt-4">There is no comfort yet ⚠️</h3>
             </div>
           )}
         </div>

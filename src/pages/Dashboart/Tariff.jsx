@@ -103,7 +103,7 @@ const Tariff = () => {
             </table>
           ) : (
             <div>
-              <h3>There is no tariff</h3>
+              <h3>There is no tariff yet ⚠️</h3>
             </div>
           )}
         </div>

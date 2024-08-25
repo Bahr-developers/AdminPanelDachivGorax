@@ -104,7 +104,7 @@ const Services = () => {
             </table>
           ) : (
             <div>
-              <h3>There is no services</h3>
+              <h3>There is no services yet ⚠️</h3>
             </div>
           )}
         </div>

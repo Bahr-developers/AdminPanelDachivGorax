@@ -115,7 +115,7 @@ function Users() {
             </table>
           ) : (
             <div>
-              <h3 className="mt-4 text-xl">There is no user</h3>
+              <h3 className="mt-4 text-xl">There is no users yet ⚠️</h3>
             </div>
           )}
         </div>

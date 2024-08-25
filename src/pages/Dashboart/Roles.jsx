@@ -106,7 +106,7 @@ function Roles() {
             </table>
           ) : (
             <div>
-              <h3 className="mt-4 text-xl">There is no roles</h3>
+              <h3 className="mt-4 text-xl">There is no roles yet ⚠️</h3>
             </div>
           )}
         </div>

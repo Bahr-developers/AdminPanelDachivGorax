@@ -52,18 +52,6 @@ function DashHome() {
   //language Change
   const { languageChange } = useContext(LanguageContext);
 
-  if (
-    users.isLoading &&
-    cottage.isLoading &&
-    language.isLoading &&
-    region.isLoading &&
-    place.isLoading &&
-    camforts.isLoading &&
-    notification.isLoading
-  ) {
-    return <Loading />;
-  }
-
   return (
     <>
       <Helmet>

@@ -95,7 +95,7 @@ function Place() {
               </table>
             ) : (
               <div>
-                <h3 className="mt-4 text-xl">There is no place</h3>
+                <h3 className="mt-4 text-xl">There is no place yet ⚠️</h3>
               </div>
             )}
           </div>
