@@ -183,13 +183,21 @@ export const multiLanguagePage = {
     {
       id: 2,
       title: {
+        uz: "Rasmi",
+        ru: "Рисунок",
+        en: "Image"
+      }
+    },
+    {
+      id: 3,
+      title: {
         uz: "Kodi",
         ru: "Код",
         en: "Code",
       },
     },
     {
-      id: 3,
+      id: 4,
       title: {
         uz: "Til",
         ru: "Язык",
@@ -197,7 +205,7 @@ export const multiLanguagePage = {
       },
     },
     {
-      id: 4,
+      id: 5,
       title: {
         uz: "O'zgartirish",
         ru: "Редактировать",
@@ -205,7 +213,7 @@ export const multiLanguagePage = {
       },
     },
     {
-      id: 5,
+      id: 6,
       title: {
         uz: "O'chirish",
         ru: "Удалить",

@@ -12,6 +12,7 @@ import { LanguageContext } from "../../Helper/LanguageContext";
 import { multiLanguagePage } from "../../utils/multiLanguages";
 import { QUERY_KEYS, useLanguage } from "../../Query";
 import { Helmet } from "react-helmet-async";
+import { IMG_BASE_URL } from "../../constants/img.constants";
 
 function Language() {
   const queryClient = useQueryClient();
@@ -63,6 +64,17 @@ function Language() {
                   return (
                     <tr key={e.id}>
                       <th scope="row">{i + 1}</th>
+                      <td>
+                        {e?.image ? (
+                          <img
+                            src={`${IMG_BASE_URL}${e.image}`}
+                            width={45}
+                            alt="Til rasmi"
+                          />
+                        ) : (
+                          "Rasm topilmadi!"
+                        )}
+                      </td>
                       <td>{e.code}</td>
                       <td>{e.title}</td>
                       <td>

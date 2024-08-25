@@ -9,7 +9,7 @@ import { FaEyeSlash } from "react-icons/fa";
 import { useState } from "react";
 
 //logo
-import adminLogo from "../assets/AdminLogo.jpg";
+import adminLogo from "../assets/full-logo.png";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Helmet } from "react-helmet-async";
 
@@ -69,7 +69,7 @@ function Login() {
               />
             </div>
             <h2 className="fs-2 fw-bold text-center text-white">
-              Dachi v gorax
+              DACHAOL.UZ
             </h2>
             <form className="mx-auto  mt-5" onSubmit={userLogin}>
               <label className="fs-4 w-100 fw-medium text-white">

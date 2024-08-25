@@ -1,7 +1,7 @@
 import { NavLink, Outlet } from "react-router-dom";
 import { useContext, useState } from "react";
 
-import Logo from "../../assets/logo.svg";
+import Logo from "../../assets/full-logo.png";
 
 import "./main.css";
 
