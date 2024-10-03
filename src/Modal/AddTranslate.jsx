@@ -37,10 +37,11 @@ function Translate() {
       definition,
       type: e.target.type.value,
     });
+    // e.reset()
     e.target.code.value = "";
     e.target.uz.value = "";
-    e.target.en.value = "";
     e.target.ru.value = "";
+    e.target.en.value = "";
   };
 
   // language Change

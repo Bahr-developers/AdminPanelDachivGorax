@@ -8,23 +8,38 @@ import { OrderUtils } from "../../utils/order.utils";
 import { toast } from "react-toastify";
 import DeleteAllModal from "../../Modal/DeleteAllModal";
 import EditOrder from "../../Modal/EditOrder";
+import { cottageUtils } from "../../utils/cottage.utils";
 
 const Order = () => {
     const { languageChange } = useContext(LanguageContext);
-    const orders = useOrderAdmin()
+    const orders = useOrderAdmin();
+    console.log(orders.data);
 
-    const queryClient = useQueryClient()
-    const deleteOrder = useMutation({
-        mutationFn: OrderUtils.deleteOrder,
+    const queryClient = useQueryClient();
+
+    const activePre = useMutation({
+        mutationFn: cottageUtils.orderActivePre,
         onSuccess: () => {
-            queryClient.invalidateQueries({queryKey: [QUERY_KEYS.order]})
-            toast.success("Success delete")
+            queryClient.invalidateQueries({ queryKey: ["active-premuim-cottage"] });
+            toast.success("Success add Premium cottage");
         },
         onError: (err) => {
             console.log(err);
-            toast.error("Error delete")
-        }
-    })
+            toast.error("Somthing went wrong");
+        },
+    });
+
+    const deleteOrder = useMutation({
+        mutationFn: OrderUtils.deleteOrder,
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.order] });
+            toast.success("Success delete");
+        },
+        onError: (err) => {
+            console.log(err.message);
+            toast.error("Error delete");
+        },
+    });
 
     return (
         <>
@@ -50,19 +65,19 @@ const Order = () => {
                             <tbody>
                                 {orders.data.map((e, i) => {
                                     return (
-                                        <tr key={e.id}>
+                                        <tr key={e.cottage.id}>
                                             <th scope="row">{i + 1}</th>
                                             <td>{e.cottage.name}</td>
                                             <td>{e.user.name}</td>
+                                            <td>{e.tariff.type}</td>
                                             <td>
-                                                {e.tariff.type}
-                                            </td>
-                                            <td>
-                                            <button
+                                                <button
                                                     className={
-                                                        e.orderStatus === "cancelled" 
+                                                        e.orderStatus === "cancelled"
                                                             ? "bg-danger ds-6 text-white btn btn-group fw-medium"
-                                                            : e.orderStatus==="success" ? "bg-success text-white btn btn-group fw-medium" :"bg-warning text-white btn btn-group fw-medium"
+                                                            : e.orderStatus === "success"
+                                                                ? "bg-success text-white btn btn-group fw-medium"
+                                                                : "bg-warning text-white btn btn-group fw-medium"
                                                     }
                                                 >
                                                     {e.orderStatus}
@@ -77,6 +92,20 @@ const Order = () => {
                                                     }
                                                 >
                                                     {e.status}
+                                                </button>
+                                            </td>
+                                            <td>
+                                                <button
+                                                    onClick={() =>
+                                                        activePre.mutate({
+                                                            cottageId: e.cottageId,
+                                                            expireDays: e.tariff.days,
+                                                            priority: +e.cottage.rating,
+                                                            serviceCode: e.tariff.service.serviceCode,
+                                                        })
+                                                    }
+                                                >
+                                                    Active Pre
                                                 </button>
                                             </td>
                                             <td>

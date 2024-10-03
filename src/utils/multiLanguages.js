@@ -342,7 +342,7 @@ export const multiLanguageOrder = {
     {
       id: 5,
       title: {
-        uz: "Buyurtma holasi",
+        uz: "Buyurtma holati",
         ru: "Статус заказа",
         en: "Order status",
       },
@@ -358,13 +358,21 @@ export const multiLanguageOrder = {
     {
       id: 7,
       title: {
+        uz: "Pre qo'sh",
+        ru: "Добавить пре",
+        en: "Add pre",
+      },
+    },
+    {
+      id: 8,
+      title: {
         uz: "O'zgartirish",
         ru: "Редактировать",
         en: "Edit",
       },
     },
     {
-      id: 8,
+      id: 9,
       title: {
         uz: "O'chirish",
         ru: "Удалить",

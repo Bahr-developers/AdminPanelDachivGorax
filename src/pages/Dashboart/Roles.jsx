@@ -16,6 +16,7 @@ function Roles() {
 
   // get roles
   const roles = useRoles();
+console.log(roles?.data);
 
   // delete roles
   const deletRoles = useMutation({
@@ -73,8 +74,8 @@ function Roles() {
                                 >
                                   {e.name}
                                   <ul>
-                                    {e.permissions?.length &&
-                                      e.permissions.map((e) => {
+                                    {e.permission?.length &&
+                                      e.permission.map((e) => {
                                         return (
                                           <li
                                             key={e.id}

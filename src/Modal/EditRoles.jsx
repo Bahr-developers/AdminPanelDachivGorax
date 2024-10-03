@@ -10,9 +10,9 @@ function EditRoles({ role }) {
 
   if (role?.permissions?.length) {
     role.permissions.map((e) => {
-      e.permissions.forEach((el) => {
-        initialPermissions.push(el.id);
-      });
+      if(!initialPermissions.includes(e.permission.id)){
+        initialPermissions.push(e.permission.id)
+      }
     });
   }
 

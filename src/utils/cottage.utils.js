@@ -54,6 +54,18 @@ export const cottageUtils = {
     const { data } = await custimAxios.post("cottage/image/add", formData);
     return data;
   },
+  orderActivePre: async ({cottageId, expireDays, priority, serviceCode}) => {
+    const {data} = await custimAxios.post(`cottage/add/premium/${cottageId}`, {
+        expireDays,
+        priority,
+        serviceCode
+    },{
+      headers:{
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+    }
+    }) 
+    return data
+  },
   patchCottageText: async ({
     id,
     comforts,

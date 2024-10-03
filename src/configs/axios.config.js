@@ -16,7 +16,7 @@ custimAxios.interceptors.response.use(
   (err) => {
     if (err?.response?.status == 406) {
       authUtils.refreshAuth();
-      window.location.reload();
+      // window.location.reload();
     }
   }
 );

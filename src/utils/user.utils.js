@@ -6,7 +6,7 @@ export const userUtils = {
     return data;
   },
   getSingleUser: async () => {
-    const { data } = await custimAxios.get("user/single");
+    const { data } = await custimAxios.get("user/me")
     return data;
   },
   getUserDevice: async (userId) => {
