@@ -10,6 +10,9 @@ import { LanguageContext } from "../../Helper/LanguageContext";
 import { multiLanguageCottageType } from "../../utils/multiLanguages";
 import { QUERY_KEYS, useCottageType } from "../../Query";
 import { Helmet } from "react-helmet-async";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import { IMG_BASE_URL } from "../../constants/img.constants";
+import EditCottageTypeImg from "../../Modal/EditCottageTypeImg";
 
 function CottageType() {
   const queryClient = useQueryClient();
@@ -60,6 +63,17 @@ function CottageType() {
                       <tr key={e.id}>
                         <th scope="row">{i + 1}</th>
                         <td>{e.name}</td>
+                        <td>
+                          <div className="d-flex align-items-center gap-3">
+                            <LazyLoadImage
+                              width={95}
+                              height={65}
+                              src={`${IMG_BASE_URL}${e.image}`}
+                              alt="img"
+                              effect="blur"
+                            />
+                            <EditCottageTypeImg place={e} />
+                          </div></td>
                         <td>
                           <EditCottageType id={e.id} />
                         </td>

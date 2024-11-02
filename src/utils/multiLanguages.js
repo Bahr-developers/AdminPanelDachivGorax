@@ -446,7 +446,7 @@ export const multiLanguagePlace = {
       },
     },
     {
-      id: 2,
+      id: 3,
       title: {
         uz: "Nomi",
         ru: "Имя",
@@ -454,7 +454,7 @@ export const multiLanguagePlace = {
       },
     },
     {
-      id: 3,
+      id: 4,
       title: {
         uz: "Rasm",
         ru: "Изображение",
@@ -462,7 +462,7 @@ export const multiLanguagePlace = {
       },
     },
     {
-      id: 4,
+      id: 5,
       title: {
         uz: "O'zgartirish",
         ru: "Редактировать",
@@ -470,7 +470,7 @@ export const multiLanguagePlace = {
       },
     },
     {
-      id: 5,
+      id: 6,
       title: {
         uz: "O'chirish",
         ru: "Удалить",
@@ -510,8 +510,17 @@ export const multiLanguageCottageType = {
         en: "Name",
       },
     },
+    
     {
       id: 3,
+      title: {
+        uz: "Rasm",
+        ru: "Картина",
+        en: "Image",
+      },
+    },
+    {
+      id: 4,
       title: {
         uz: "O'zgartirish",
         ru: "Редактировать",
@@ -519,7 +528,7 @@ export const multiLanguageCottageType = {
       },
     },
     {
-      id: 4,
+      id: 5,
       title: {
         uz: "O'chirish",
         ru: "Удалить",
