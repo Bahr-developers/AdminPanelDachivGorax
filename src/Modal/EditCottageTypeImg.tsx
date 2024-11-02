@@ -1,12 +1,11 @@
+import React from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { CiEdit } from "react-icons/ci";
-import { placeUtils } from "../utils/place.utils";
 import toastify from "../utils/toastify";
 import { QUERY_KEYS } from "../Query";
 import { useState } from "react";
 import { MdCloudUpload } from "react-icons/md";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import React from "react";
 import { cottageTypeUtils } from "../utils/cottage-type.utils";
 
 function EditCottageTypeImg({ place }) {
