@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { cottageUtils } from "../utils/cottage.utils";
-import { useContext, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { IMG_BASE_URL } from "../constants/img.constants";
 import toastify from "../utils/toastify";
 import { LanguageContext } from "../Helper/LanguageContext";
@@ -33,6 +33,14 @@ function AddCottage() {
   const cottageCloseBtn = useRef(null);
   const childImagesWrapper = useRef(null);
   const mainImage = useRef(null);
+  const [location, setLocation]= useState('')
+  // location
+
+  const coordinates = location?.match(/@(-?\d+\.\d+),(-?\d+\.\d+)/);
+
+  const latitude = coordinates?.length && coordinates[1];  
+  const longitude = coordinates?.length && coordinates[2]; 
+  
 
   const [cottageInfo, setCottageInfo] = useState({
     dachaType: [],
@@ -115,6 +123,8 @@ function AddCottage() {
       cottageType: cottageInfo.response,
       comforts: cottageComforts.response,
       description: e.target.discription.value,
+      longitude: longitude?longitude:'',
+      latitude: latitude ? latitude:''
     });
   };
 
@@ -222,17 +232,14 @@ function AddCottage() {
                   ></div>
                 </div>
                 <p className="mt-3 mb-0">Select cottage type</p>
-                <div className="d-flex mb-3">
+                <div className="d-flex flex-wrap gap-3 mb-3">
                   {cottageType.data?.length &&
                     cottageType.data.map((e) => {
                       return (
                         <label
                           key={e.id}
-                          className="d-flex align-items-center w-25 gap-2"
+                          className="d-flex flex-wrap align-items-center gap-1 grid"
                         >
-                          <p className="type-text fs-5 d-block mb-0">
-                            {e.name}
-                          </p>
                           <input
                             className="form-check-input"
                             type="checkbox"
@@ -240,6 +247,9 @@ function AddCottage() {
                             value={e.id}
                             onChange={handlChoseCottageType}
                           />
+                          <p className="type-text g-col-6 fs-5 d-block mb-0">
+                            {e.name}
+                          </p>
                         </label>
                       );
                     })}
@@ -310,12 +320,12 @@ function AddCottage() {
                 </div>
 
                 <p className="mb-1">select cotttage comfort</p>
-                <div className="addnew-objects d-flex flex-wrap mb-3">
+                <div className="gap-3 d-flex flex-wrap mb-3">
                   {comforts.data?.length &&
                     comforts.data.map((e) => {
                       return (
                         <label
-                          className="addnew-object cursor-pointer  gap-2"
+                          className="addnew-object cursor-pointer  gap-1"
                           key={e.id}
                         >
                           <input
@@ -335,6 +345,16 @@ function AddCottage() {
                         </label>
                       );
                     })}
+                </div>
+                <p className="mb-1">Add location</p>
+                <div className="">
+                          <input
+                            className="form-control"
+                            type="text"
+                            name="location"
+                            placeholder="Location"
+                            onChange={(e) => setLocation(e.target.value)}
+                          />
                 </div>
                 <label className="d-block">
                   <span className="d-block mb-1">

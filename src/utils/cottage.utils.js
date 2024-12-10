@@ -20,6 +20,8 @@ export const cottageUtils = {
     price,
     priceWeekend,
     regionId,
+    longitude,
+    latitude
   }) => {
     try {
       const formData = new FormData();
@@ -39,6 +41,8 @@ export const cottageUtils = {
       formData.append("price", price);
       formData.append("priceWeekend", priceWeekend);
       formData.append("description", description);
+      formData.append("longitude", longitude)
+      formData.append("latitude", latitude)
       console.log(formData.getAll("images"), formData.get("mainImage"));
       const { data } = await custimAxios.post("cottage/add", formData);
       return data;
