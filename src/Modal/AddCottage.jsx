@@ -41,6 +41,7 @@ function AddCottage() {
   const latitude = coordinates?.length && coordinates[1];  
   const longitude = coordinates?.length && coordinates[2]; 
   
+console.log(latitude, longitude);
 
   const [cottageInfo, setCottageInfo] = useState({
     dachaType: [],
@@ -123,9 +124,10 @@ function AddCottage() {
       cottageType: cottageInfo.response,
       comforts: cottageComforts.response,
       description: e.target.discription.value,
-      longitude: longitude?longitude:'',
-      latitude: latitude ? latitude:''
+      longitude: longitude ? longitude : '',
+      latitude: latitude ? latitude : ''
     });
+    console.log(cottage.variables);    
   };
 
   const isMainImage = async (e) => {

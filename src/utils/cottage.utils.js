@@ -43,11 +43,11 @@ export const cottageUtils = {
       formData.append("description", description);
       formData.append("longitude", longitude)
       formData.append("latitude", latitude)
-      console.log(formData.getAll("images"), formData.get("mainImage"));
       const { data } = await custimAxios.post("cottage/add", formData);
+      console.log(data);      
       return data;
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
     }
   },
   addCottageImage: async ({ cottageId, image, isMainImage }) => {
