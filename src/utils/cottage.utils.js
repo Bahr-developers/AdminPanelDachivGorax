@@ -44,7 +44,6 @@ export const cottageUtils = {
       formData.append("longitude", longitude)
       formData.append("latitude", latitude)
       const { data } = await custimAxios.post("cottage/add", formData);
-      console.log(data);      
       return data;
     } catch (error) {
       console.log(error.message);

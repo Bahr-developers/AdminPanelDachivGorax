@@ -12,9 +12,6 @@ import { SERVER_BASE_URL } from "./constants/server.constants.js";
 const queryClient = new QueryClient();
 
 
-console.log(SERVER_BASE_URL);
-
-
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>

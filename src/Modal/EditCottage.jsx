@@ -92,7 +92,6 @@ function EditCottage({ id, cottage }) {
         response: comforts.filter((e) => e !== value),
       });
     }
-    console.log(value);
   };
 
   const handlCottage = (e) => {
@@ -113,7 +112,6 @@ function EditCottage({ id, cottage }) {
       isTop: e.target.bannerStatus.value === "true" ? true : false,
       status: e.target.status.value === "true" ? "active" : "inactive",
     });
-    console.log(cottageEdit.variables);
   };
 
   return (
