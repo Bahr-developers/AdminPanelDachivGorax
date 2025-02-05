@@ -20,7 +20,6 @@ function Cottage() {
 
   // get cottage
   const cottage = useCottage();
-console.log(cottage?.data);
 
   // delete cottage
   const deletCottage = useMutation({

@@ -40,9 +40,6 @@ function AddCottage() {
 
   const latitude = coordinates?.length && coordinates[1];  
   const longitude = coordinates?.length && coordinates[2]; 
-  
-console.log(latitude, longitude);
-
   const [cottageInfo, setCottageInfo] = useState({
     dachaType: [],
     response: [],
