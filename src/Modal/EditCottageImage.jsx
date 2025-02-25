@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { cottageUtils } from "../utils/cottage.utils";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { IMG_BASE_URL } from "../constants/img.constants";
 import toastify from "../utils/toastify";
 
@@ -12,17 +12,18 @@ import { CiEdit } from "react-icons/ci";
 import { FaUpload } from "react-icons/fa";
 import { QUERY_KEYS } from "../Query";
 import { MdDelete } from "react-icons/md";
+import ImageCropper from "./ImageCropper";
 
 function EditCottageImage({ id, images }) {
-  const mainImage = useRef(null);
+  const mainImageRef = useRef(null);
 
   const childImagesWrapper = useRef(null);
-
+  const [mainImage, setMainImage] = useState(images.find((e) => e.isMainImage === true))
+  const imageId = images.find((e) => e.isMainImage === true).id
   const queryClient = useQueryClient();
-
-  const mainImageCottage = images.find((e) => e.isMainImage === true);
   const childImages = images.filter((e) => e.isMainImage !== true);
-
+  console.log(mainImage);
+  
   const cottageMainImg = useMutation({
     mutationFn: cottageUtils.patchCottageImage,
     onSuccess: () => {
@@ -67,10 +68,10 @@ function EditCottageImage({ id, images }) {
   };
 
   const handleMainImage = async (e) => {
-    if (mainImageCottage?.id) {
+    if (imageId) {
       cottageMainImg.mutate({
-        id: mainImageCottage.id,
-        image: e.target.files[0],
+        id: imageId,
+        image: mainImage,
       });
       return;
     }
@@ -119,10 +120,10 @@ function EditCottageImage({ id, images }) {
             <div className="modal-body">
               <form className="p-4" onSubmit={handlCottage}>
                 <div className="main-image-wrapper d-flex align-items-end justify-content-between border p-3">
-                  {mainImageCottage?.image && (
+                  {mainImage?.image && (
                     <LazyLoadImage
-                      ref={mainImage}
-                      src={`${IMG_BASE_URL}${mainImageCottage.image}`}
+                      ref={mainImageRef}
+                      src={`${IMG_BASE_URL}${mainImage.image}`}
                       alt="main-image"
                       width={450}
                       height={280}
@@ -141,6 +142,7 @@ function EditCottageImage({ id, images }) {
                     <FaUpload size={30} />
                     <span> Main Img</span>
                   </label>
+                    <ImageCropper  onImageCropped={setMainImage}/>
                 </div>
                 <div className="imagesMultiple mt-4 border p-2 rounded">
                   <label className="file-input-label d-block w-25 text-center mb-2">

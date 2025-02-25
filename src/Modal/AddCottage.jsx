@@ -28,14 +28,15 @@ import {
   useRegion,
 } from "../Query";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import ImageCropper from "./ImageCropper";
 
 function AddCottage() {
   const cottageCloseBtn = useRef(null);
   const childImagesWrapper = useRef(null);
-  const mainImage = useRef(null);
+  const mainImageRef = useRef(null);
   const [location, setLocation]= useState('')
-  // location
-
+  const [mainImage, setMainImage] = useState()
+  
   const coordinates = location?.match(/@(-?\d+\.\d+),(-?\d+\.\d+)/);
 
   const latitude = coordinates?.length && coordinates[1];  
@@ -113,7 +114,7 @@ function AddCottage() {
     cottage.mutate({
       name: e.target.cottagename.value,
       images: images,
-      mainImage: e.target.mainImage.files[0],
+      mainImage: mainImage,
       placeId: e.target.place.value,
       regionId: e.target.region.value,
       price: Number(e.target.price.value),
@@ -128,8 +129,9 @@ function AddCottage() {
   };
 
   const isMainImage = async (e) => {
-    mainImage.current.src = await getBase64Full(e.target.files[0]);
-    mainImage.current.classList.remove("d-none");
+    mainImageRef.current.src = await getBase64Full(e.target.files[0]);
+    mainImageRef.current.classList.remove("d-none");
+
   };
 
   const handlmultipleImg = async (e) => {
@@ -202,8 +204,9 @@ function AddCottage() {
                     <FaUpload size={25} />
                     <span>Main Image</span>
                   </label>
+                  <ImageCropper onImageCropped={setMainImage}/>
                   <img
-                    ref={mainImage}
+                    ref={mainImageRef}
                     width={150}
                     height={170}
                     src=""

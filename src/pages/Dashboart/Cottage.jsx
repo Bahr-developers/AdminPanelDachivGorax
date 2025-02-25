@@ -106,14 +106,15 @@ function Cottage() {
                           {el.status}
                         </p>
                       </th>
-                      <td>
+                      {el?.cottageType[0]?.id !== '678811f1-d67c-42fa-a78c-f1d980df3397' ? <td>
                         <p>
                           {el.price} sum
                         </p>
                         <p>
                           {el.priceWeekend} sum(weekend)
                         </p>
-                      </td>
+                      </td>:
+                      <td>Masjid</td>}
                       <td className="d-flex gap-2">
                         <EditCottage id={el.id} cottage={el} />
                         <DeleteAllModal
