@@ -87,11 +87,11 @@ function EditCottageImage({ id, images }) {
     <div>
       <button
         type="button"
-        className="btn btn-success"
+        className="btn position-absolute text-danger z-1 top-0 end-0"
         data-bs-toggle="modal"
         data-bs-target={`#editImages${id}`}
       >
-        <CiEdit size={25} />
+        <CiEdit className="text-white bg-success rounded-circle" size={25} />
       </button>
       <div
         className="modal modal-lg fade"

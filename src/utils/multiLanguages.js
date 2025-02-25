@@ -650,14 +650,6 @@ export const multiLanguageCottage = {
       },
     },
     {
-      id: 6,
-      title: {
-        uz: "Joy",
-        ru: "Место",
-        en: "Place",
-      },
-    },
-    {
       id: 7,
       title: {
         uz: "Kottej holati",
@@ -679,46 +671,6 @@ export const multiLanguageCottage = {
         uz: "Narxi",
         ru: "Цена",
         en: "Price",
-      },
-    },
-    {
-      id: 11,
-      title: {
-        uz: "Haftalik Narxi",
-        ru: "НеделяЦена",
-        en: "WeekPrice",
-      },
-    },
-    {
-      id: 12,
-      title: {
-        uz: "Qulaylik",
-        ru: "Комфорт",
-        en: "Comfort",
-      },
-    },
-    {
-      id: 13,
-      title: {
-        uz: "Tavsifi",
-        ru: "Описание",
-        en: "Description",
-      },
-    },
-    {
-      id: 14,
-      title: {
-        uz: "O'zgartirish",
-        ru: "Редактировать",
-        en: "Edit",
-      },
-    },
-    {
-      id: 15,
-      title: {
-        uz: "O'chirish",
-        ru: "Удалить",
-        en: "Delete",
       },
     },
   ],

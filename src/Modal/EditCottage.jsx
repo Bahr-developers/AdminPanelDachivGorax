@@ -109,7 +109,6 @@ function EditCottage({ id, cottage }) {
       description: e.target.discription.value,
       lattitude: "",
       longitude: "",
-      isTop: e.target.bannerStatus.value === "true" ? true : false,
       status: e.target.status.value === "true" ? "active" : "inactive",
     });
   };
@@ -161,17 +160,17 @@ function EditCottage({ id, cottage }) {
                 </label>
 
                 <p className="mb-0">Edit cottage type</p>
-                <div className="wrap-type-cottage d-flex align-items-center gap-5">
+                <div className="wrap-type-cottage d-flex flex-wrap align-items-center gap-2">
                   {cottageType.data?.length &&
                     cottageType.data.map((e) => {
                       return (
                         <label
                           key={e.id}
-                          className="d-flex align-items-center gap-2  justify-content-evenly"
+                          className="d-flex align-items-center justify-content-evenly gap-1"
                         >
-                          <p className="type-text fs-5 d-block">{e.name}</p>
+                          <p className="m-0">{e.name}</p>
                           <input
-                            className="form-check-input mb-3"
+                            className="form-check-input"
                             type="checkbox"
                             onChange={handlChoseCottageType}
                             name={e.id}
@@ -239,20 +238,6 @@ function EditCottage({ id, cottage }) {
                     </select>
                   </label>
                   <label className="d-block col">
-                    <span className="d-block mb-1">Banner</span>
-                    <select
-                      defaultValue="banner"
-                      name="bannerStatus"
-                      className="form-select"
-                    >
-                      <option value="banner" disabled>
-                        Banner
-                      </option>
-                      <option value="true">Bannerga qo`shish</option>
-                      <option value="false">Bannerga o`chirish</option>
-                    </select>
-                  </label>
-                  <label className="d-block col">
                     <span className="d-block mb-1">Status</span>
                     <select
                       name="status"
@@ -291,11 +276,11 @@ function EditCottage({ id, cottage }) {
                 </div>
 
                 <p className="mb-1">Select cottage comforts</p>
-                <div className="addnew-objects d-flex flex-wrap mb-3">
+                <div className="addnew-objects d-flex flex-wrap gap-2">
                   {comforts.data?.length &&
                     comforts.data.map((e) => {
                       return (
-                        <label className="addnew-object gap-2" key={e.id}>
+                        <label className="addnew-object gap-1" key={e.id}>
                           <input
                             className="form-check-input"
                             type="checkbox"
@@ -314,7 +299,7 @@ function EditCottage({ id, cottage }) {
                             width={20}
                             height={20}
                           />
-                          <p className="mb-0">{e.name}</p>
+                          <p className="">{e.name}</p>
                         </label>
                       );
                     })}

@@ -10,7 +10,7 @@ a {
   width: 130px;
 }
 .table-cottage {
-  width: 2100px;
+  width: 100%;
   scroll-behavior: smooth;
 }
 .cottage-inner {

@@ -32,7 +32,8 @@ function Cottage() {
 
   // language Change
   const { languageChange } = useContext(LanguageContext);
-
+  console.log(cottage);
+  
   if (cottage.isLoading) return <Loading />;
 
   return (
@@ -46,7 +47,7 @@ function Cottage() {
           <AddCottage />
         </div>
         <div className="cottage-inner">
-          {cottage.data?.length ? (
+          {cottage?.data?.length ? (
             <table className="table table-cottage table-bordered shadow">
               <thead>
                 <tr>
@@ -58,33 +59,20 @@ function Cottage() {
                 </tr>
               </thead>
               <tbody>
-                {cottage.data.map((el, i) => {
+                {cottage?.data.map((el, i) => {
                   return (
                     <tr key={el.id} className="singil-cottage">
                       <th scope="row">{i + 1}</th>
                       <td>{el.name}</td>
-                      <td>
-                        <ul className="list-unstyled img-wrap-cottage gap-2">
-                          {el.images?.length &&
-                            el.images.map((e) => {
-                              return (
-                                <li key={e.id} className="d-wrap">
-                                  <LazyLoadImage
-                                    src={`${IMG_BASE_URL}${e.image}`}
-                                    className={
-                                      e.isMainImage
-                                        ? "border border-5 d-block border-warning rounded-3 "
-                                        : "rounded-3 "
-                                    }
-                                    width={80}
-                                    height={80}
-                                    alt="img"
-                                    effect="blur"
-                                  />
-                                </li>
-                              );
-                            })}
-                        </ul>
+                      <td className="position-relative p-1">
+                        <LazyLoadImage
+                          src={`${IMG_BASE_URL}${el.images.find(el => el.isMainImage).image}`}
+                          className="rounded-3 "
+                          width={120}
+                          height={100}
+                          alt="img"
+                          effect="blur"
+                        />
                         <EditCottageImage id={el.id} images={el.images} />
                       </td>
                       <td>
@@ -92,13 +80,15 @@ function Cottage() {
                           return <p key={e.id}>{e.name}</p>;
                         })}
                       </td>
-                      <td>{el.region.name}</td>
-                      <td>{el.place.name}</td>
+                      <td className="d-flex flex-column">
+                        <p>{el.region.name}</p>
+                        <p>{el.place.name} </p>
+                      </td>
                       <td>
                         <p
                           className={
                             el.cottageStatus === "confirmed"
-                              ? "p-2 rounded fw-bold bg-success text-white"
+                              ? "p-2 rounded fw-bold bg-success text-white text-center"
                               : "p-2 rounded fw-bold text-center bg-warning text-white"
                           }
                         >
@@ -116,34 +106,16 @@ function Cottage() {
                           {el.status}
                         </p>
                       </th>
-                      <td>{el.price}</td>
-                      <td>{el.priceWeekend}$</td>
                       <td>
-                        {el.comforts?.length &&
-                          el.comforts.map((e) => {
-                            return (
-                              <div
-                                key={e.id}
-                                className="comforts d-flex align-items-centr gap-2"
-                              >
-                                <LazyLoadImage
-                                  width={20}
-                                  height={20}
-                                  src={`${IMG_BASE_URL}${e.image}`}
-                                  alt={e.name}
-                                />
-                                <p>{e.name}</p>
-                              </div>
-                            );
-                          })}
+                        <p>
+                          {el.price} sum
+                        </p>
+                        <p>
+                          {el.priceWeekend} sum(weekend)
+                        </p>
                       </td>
-                      <td>
-                        <pre>{el.description}</pre>
-                      </td>
-                      <td>
+                      <td className="d-flex gap-2">
                         <EditCottage id={el.id} cottage={el} />
-                      </td>
-                      <td>
                         <DeleteAllModal
                           deleteFunction={deletCottage.mutate}
                           id={el.id}

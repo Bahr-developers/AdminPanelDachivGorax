@@ -81,7 +81,6 @@ export const cottageUtils = {
     status,
     lattitude,
     longitude,
-    isTop,
   }) => {
     const { data } = await custimAxios.patch(`/cottage/edit/${id}`, {
       comforts: comforts,
