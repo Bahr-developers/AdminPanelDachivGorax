@@ -22,12 +22,13 @@ function EditCottageImage({ id, images }) {
   const imageId = images.find((e) => e.isMainImage === true).id
   const queryClient = useQueryClient();
   const childImages = images.filter((e) => e.isMainImage !== true);
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const cottageMainImg = useMutation({
     mutationFn: cottageUtils.patchCottageImage,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.cottages] });
       toastify.successMessage('Success a new main image')      
+      setIsModalOpen(false)
     },
     onError: (err) => {
       console.log(err);
@@ -89,6 +90,7 @@ function EditCottageImage({ id, images }) {
         className="btn position-absolute text-danger z-1 top-0 end-0"
         data-bs-toggle="modal"
         data-bs-target={`#editImages${id}`}
+        onClick={() => setIsModalOpen(true)}
       >
         <CiEdit className="text-white bg-success rounded-circle" size={25} />
       </button>
@@ -97,7 +99,7 @@ function EditCottageImage({ id, images }) {
         id={`editImages${id}`}
         tabIndex="-1"
         aria-labelledby={`editImages${id}Label`}
-        aria-hidden="true"
+        {...(isModalOpen ? {} : { inert: "true" })} 
       >
         <div className="modal-dialog modal-dialog-scrollable">
           <div className="modal-content">
@@ -173,7 +175,7 @@ function EditCottageImage({ id, images }) {
                   </div>
                 </div>
                 <button
-                  onClick={handlCottage}
+                  onClick={handlCottage}                  
                   data-bs-dismiss="modal"
                   className="btn-modal bg-success border-0 mt-4 fs-6 fw-bold rounded-2 text-white d-block"
                 >
