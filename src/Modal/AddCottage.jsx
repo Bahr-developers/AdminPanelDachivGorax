@@ -191,20 +191,7 @@ function AddCottage() {
                     placeholder="cottage name"
                   />
                 </label>
-                <div className="imagesMultiple mt-4 border p-2 rounded">
-                  <label className="file-input-label d-block w-25 text-center mb-2">
-                    <input
-                      onChange={isMainImage}
-                      type="file"
-                      accept="image/*"
-                      name="mainImage"
-                      id="cottage-main-img"
-                      className="file-input"
-                    />
-                    <FaUpload size={25} />
-                    <span>Main Image</span>
-                  </label>
-                  <ImageCropper onImageCropped={setMainImage}/>
+                <div className="imagesMultiple mt-4 border p-2 rounded">                  
                   <img
                     ref={mainImageRef}
                     width={150}
@@ -213,6 +200,7 @@ function AddCottage() {
                     alt="img"
                     className="main-image d-none"
                   />
+                  <ImageCropper onImageCropped={setMainImage}/>
                 </div>
                 <div className="imagesMultiple mt-4 border p-2 rounded">
                   <label className="file-input-label d-block w-25 text-center mb-2">

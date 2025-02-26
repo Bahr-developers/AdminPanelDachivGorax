@@ -1,5 +1,6 @@
 import React, { useState, useCallback, useRef } from "react";
 import Cropper from "react-easy-crop";
+import { FaUpload } from "react-icons/fa";
 
 const ImageCropper = ({ onImageCropped }) => {
     const [imageSrc, setImageSrc] = useState(null);
@@ -82,13 +83,17 @@ const ImageCropper = ({ onImageCropped }) => {
     return (
         <div>
             {/* Fayl yuklash inputi */}
-            <input
-                type="file"
-                accept="image/*"
-                onChange={onFileChange}
-                ref={fileInputRef}
-            />
-
+            <label className="file-input-label d-block w-25 text-center mb-2">
+                <input
+                    type="file"
+                    accept="image/*"
+                    onChange={onFileChange}
+                    ref={fileInputRef}
+                    className="file-input"
+                />
+                <FaUpload size={25} />
+                <span>Main Image</span>
+            </label>
             {imageSrc && !croppedImageUrl && (
                 <div style={{ width: "100%", height: "300px", position: "relative" }}>
                     <Cropper

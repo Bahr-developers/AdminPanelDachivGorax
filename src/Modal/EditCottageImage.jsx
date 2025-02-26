@@ -22,12 +22,12 @@ function EditCottageImage({ id, images }) {
   const imageId = images.find((e) => e.isMainImage === true).id
   const queryClient = useQueryClient();
   const childImages = images.filter((e) => e.isMainImage !== true);
-  console.log(mainImage);
-  
+
   const cottageMainImg = useMutation({
     mutationFn: cottageUtils.patchCottageImage,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.cottages] });
+      toastify.successMessage('Success a new main image')      
     },
     onError: (err) => {
       console.log(err);
@@ -63,11 +63,9 @@ function EditCottageImage({ id, images }) {
     });
   };
 
-  const handlCottage = async (e) => {
-    e.preventDefault();
-  };
+  
 
-  const handleMainImage = async (e) => {
+  const handlCottage =  () => {
     if (imageId) {
       cottageMainImg.mutate({
         id: imageId,
@@ -78,7 +76,7 @@ function EditCottageImage({ id, images }) {
 
     addCottageImage.mutate({
       cottageId: id,
-      image: e.target.files[0],
+      image: mainImage,
       isMain: true,
     });
     return;
@@ -118,31 +116,19 @@ function EditCottageImage({ id, images }) {
               ></button>
             </div>
             <div className="modal-body">
-              <form className="p-4" onSubmit={handlCottage}>
-                <div className="main-image-wrapper d-flex align-items-end justify-content-between border p-3">
+              <div className="p-4">
+                <div className="gap-2 border p-3">
+                  <ImageCropper  onImageCropped={setMainImage}/>
                   {mainImage?.image && (
                     <LazyLoadImage
                       ref={mainImageRef}
                       src={`${IMG_BASE_URL}${mainImage.image}`}
                       alt="main-image"
-                      width={450}
-                      height={280}
+                      width={400}
+                      height={230}
                       className="rounded-3"
                     />
                   )}
-                  <label className="file-input-label d-block w-25 text-center mb-2">
-                    <input
-                      onChange={handleMainImage}
-                      type="file"
-                      accept="image/*"
-                      name="mainImage"
-                      id="cottage-main-img"
-                      className="file-input"
-                    />
-                    <FaUpload size={30} />
-                    <span> Main Img</span>
-                  </label>
-                    <ImageCropper  onImageCropped={setMainImage}/>
                 </div>
                 <div className="imagesMultiple mt-4 border p-2 rounded">
                   <label className="file-input-label d-block w-25 text-center mb-2">
@@ -187,13 +173,13 @@ function EditCottageImage({ id, images }) {
                   </div>
                 </div>
                 <button
-                  type="submit"
+                  onClick={handlCottage}
                   data-bs-dismiss="modal"
                   className="btn-modal bg-success border-0 mt-4 fs-6 fw-bold rounded-2 text-white d-block"
                 >
                   Save changes
                 </button>
-              </form>
+              </div>
             </div>
           </div>
         </div>

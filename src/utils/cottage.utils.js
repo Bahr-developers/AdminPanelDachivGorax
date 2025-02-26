@@ -93,7 +93,6 @@ export const cottageUtils = {
       status: status,
       lattitude: lattitude,
       longitude: longitude,
-      isTop: isTop,
     });
     return data;
   },
