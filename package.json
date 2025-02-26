@@ -10,7 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@react-google-maps/api": "^2.20.5",
+    "@react-google-maps/api": "^2.20.6",
     "@tanstack/react-query": "^5.14.2",
     "axios": "^1.6.2",
     "module_name": "^1.0.0",
