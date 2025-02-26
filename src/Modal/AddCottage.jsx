@@ -29,18 +29,17 @@ import {
 } from "../Query";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import ImageCropper from "./ImageCropper";
+import DachaMap from "../Components/DachaMap";
 
 function AddCottage() {
   const cottageCloseBtn = useRef(null);
   const childImagesWrapper = useRef(null);
   const mainImageRef = useRef(null);
-  const [location, setLocation]= useState('')
   const [mainImage, setMainImage] = useState()
-  
-  const coordinates = location?.match(/@(-?\d+\.\d+),(-?\d+\.\d+)/);
-
-  const latitude = coordinates?.length && coordinates[1];  
-  const longitude = coordinates?.length && coordinates[2]; 
+  const [location, setLocation] = useState({
+    latitude: "",
+    longitude: ""
+  })
   const [cottageInfo, setCottageInfo] = useState({
     dachaType: [],
     response: [],
@@ -104,6 +103,14 @@ function AddCottage() {
       });
     }
   };
+  const handleLocationSelect = (location) => {
+    setLocation(
+            {
+              latitude: location.lat,
+              longitude: location.lng,
+            }
+    );
+  };
 
   const handlCottage = (e) => {
     e.preventDefault();
@@ -122,8 +129,8 @@ function AddCottage() {
       cottageType: cottageInfo.response,
       comforts: cottageComforts.response,
       description: e.target.discription.value,
-      longitude: longitude ? longitude : '',
-      latitude: latitude ? latitude : ''
+      latitude: location.latitude,
+      longitude: location.longitude
     });
     console.log(cottage.variables);    
   };
@@ -337,15 +344,7 @@ function AddCottage() {
                     })}
                 </div>
                 <p className="mb-1">Add location</p>
-                <div className="">
-                          <input
-                            className="form-control"
-                            type="text"
-                            name="location"
-                            placeholder="Location"
-                            onChange={(e) => setLocation(e.target.value)}
-                          />
-                </div>
+                <DachaMap onLocationSelect={handleLocationSelect}/>
                 <label className="d-block">
                   <span className="d-block mb-1">
                     Enter cottage description

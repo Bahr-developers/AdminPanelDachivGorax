@@ -12,12 +12,14 @@ import {
   useRegion,
 } from "../Query";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import DachaMap from "../Components/DachaMap";
 
 function EditCottage({ id, cottage }) {
   const cottageTypeUset = [];
 
   const cottageComfortUset = [];
-
+  console.log(cottage);
+  
   if (cottage.cottageType.length) {
     cottage.cottageType.forEach((e) => {
       cottageTypeUset.push(e.id);
@@ -39,7 +41,10 @@ function EditCottage({ id, cottage }) {
     comforts: [...cottageComfortUset],
     response: [...cottageComfortUset],
   });
-
+  const [location, setLocation] = useState({
+    latitude: cottage?.latitude?cottage?.latitude:"",
+    longitude: cottage?.longitude?cottage?.longitude:"",
+  })
   const queryClient = useQueryClient();
 
   const cottageEdit = useMutation({
@@ -92,6 +97,15 @@ function EditCottage({ id, cottage }) {
         response: comforts.filter((e) => e !== value),
       });
     }
+  };
+
+  const handleLocationSelect = (location) => {
+    setLocation(
+            {
+              latitude: location.lat,
+              longitude: location.lng,
+            }
+    );
   };
 
   const handlCottage = (e) => {
@@ -304,6 +318,7 @@ function EditCottage({ id, cottage }) {
                       );
                     })}
                 </div>
+                <DachaMap onLocationSelect={handleLocationSelect}/>
                 <label className="d-block">
                   <span className="d-block mb-1">Cottage description</span>
                   <textarea
