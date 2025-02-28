@@ -172,3 +172,11 @@
   opacity: 0.8;
   font-size: medium;
 }
+
+.pac-container {
+  z-index: 9999 !important; /* Modalning ustiga chiqishiga majbur qilamiz */
+}
+.map-container {
+  position: relative;
+  z-index: 9999 !important;
+}

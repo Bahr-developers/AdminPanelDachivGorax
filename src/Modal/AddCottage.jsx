@@ -158,7 +158,7 @@ function AddCottage() {
   const { languageChange } = useContext(LanguageContext);
 
   return (
-    <div>
+    <div className="">
       <button
         type="button"
         className="btn btn-primary"
@@ -174,7 +174,7 @@ function AddCottage() {
         aria-labelledby="addCottageLabel"
         aria-hidden="true"
       >
-        <div className="modal-dialog modal-dialog-scrollable">
+        <div className="modal-dialog modal-dialog-scrollable z-1">
           <div className="modal-content">
             <div className="modal-header">
               <h1 className="modal-title fs-5 fw-bold" id="addCottageLabel">
