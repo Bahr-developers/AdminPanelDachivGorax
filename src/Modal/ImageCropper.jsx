@@ -8,7 +8,7 @@ const ImageCropper = ({ onImageCropped }) => {
     const [zoom, setZoom] = useState(1);
     const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
     const fileInputRef = useRef(null);
-    const [croppedImageUrl, setCroppedImageUrl] = useState(null); // Kesilgan rasm URL'ini saqlash
+    const [croppedImageUrl, setCroppedImageUrl] = useState(null); 
 
     // Fayl yuklash
     const onFileChange = async (event) => {

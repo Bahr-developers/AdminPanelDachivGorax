@@ -21,7 +21,7 @@ const Order = () => {
         mutationFn: cottageUtils.orderActivePre,
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["active-premuim-cottage"] });
-            toast.success("Success add Premium cottage");
+            toast?.success("Success add Premium cottage");
         },
         onError: (err) => {
             console.log(err);
@@ -65,7 +65,7 @@ const Order = () => {
                             <tbody>
                                 {orders.data.map((e, i) => {
                                     return (
-                                        <tr key={e.cottage.id}>
+                                        <tr key={Math.random()}>
                                             <th scope="row">{i + 1}</th>
                                             <td>{e.cottage.name}</td>
                                             <td>{e.user.name}</td>

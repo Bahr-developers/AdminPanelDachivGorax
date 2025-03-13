@@ -135,12 +135,6 @@ function AddCottage() {
     console.log(cottage.variables);    
   };
 
-  const isMainImage = async (e) => {
-    mainImageRef.current.src = await getBase64Full(e.target.files[0]);
-    mainImageRef.current.classList.remove("d-none");
-
-  };
-
   const handlmultipleImg = async (e) => {
     const images = [];
     for (let i = 0; i < e.target.files.length; i++) {
@@ -198,15 +192,7 @@ function AddCottage() {
                     placeholder="cottage name"
                   />
                 </label>
-                <div className="imagesMultiple mt-4 border p-2 rounded">                  
-                  <img
-                    ref={mainImageRef}
-                    width={150}
-                    height={170}
-                    src=""
-                    alt="img"
-                    className="main-image d-none"
-                  />
+                <div className="imagesMultiple mt-4 border p-2 rounded">
                   <ImageCropper onImageCropped={setMainImage}/>
                 </div>
                 <div className="imagesMultiple mt-4 border p-2 rounded">
