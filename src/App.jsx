@@ -1,7 +1,11 @@
 import { Route, Routes, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { LanguageContext } from "./Helper/LanguageContext";
+import { useQueryClient } from "@tanstack/react-query";
 
+// Sahifalar
 import Home from "./pages/Dashboart/dashHome";
-import Dashboart from "./pages/Dashboart";
+import Dashboard from "./pages/Dashboart";
 import Language from "./pages/Dashboart/Language";
 import Comfort from "./pages/Dashboart/Comfort";
 import Place from "./pages/Dashboart/Place";
@@ -13,18 +17,16 @@ import Notification from "./pages/Dashboart/Notification";
 import CottageType from "./pages/Dashboart/CottageType";
 import Roles from "./pages/Dashboart/Roles";
 import Users from "./pages/Dashboart/Users";
-import { useEffect, useState } from "react";
-import { LanguageContext } from "./Helper/LanguageContext";
-import { useQueryClient } from "@tanstack/react-query";
 import Services from "./pages/Dashboart/Services";
 import Tariff from "./pages/Dashboart/Tariff";
 import UserProfile from "./pages/Dashboart/UserProfile";
 import PageNotFound from "./pages/PageNotFound";
 import Order from "./pages/Dashboart/Order";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const queryClient = useQueryClient();
-
   const navigate = useNavigate();
 
   if (!localStorage.getItem("language")) localStorage.setItem("language", "uz");
@@ -33,27 +35,27 @@ function App() {
     localStorage.getItem("language")
   );
 
-  const toggleLanguage = (e) => {
-    localStorage.setItem("language", e.target.value);
-    setLanguageChange(e.target.value);
-    queryClient.invalidateQueries({ type: "all" });
+  const toggleLanguage = (value) => {
+    localStorage.setItem("language", value);
+    setLanguageChange(value);
+    queryClient.invalidateQueries();
   };
 
-  // protected Route
+  // Protected Route
   const accessToken = localStorage.getItem("accessToken");
 
   useEffect(() => {
     if (!accessToken) {
-      navigate("/");
+      navigate("/",{ replace: true });
     }
-  }, []);
+  }, [accessToken, navigate]);
 
   return (
     <div className="App">
       <LanguageContext.Provider value={{ languageChange, toggleLanguage }}>
         <Routes>
           <Route path="/" element={<Login />} />
-          <Route path="/dashboart" element={<Dashboart />}>
+          <Route path="/dashboart" element={<Dashboard />}>
             <Route index element={<Home />} />
             <Route path="home" element={<Home />} />
             <Route path="language" element={<Language />} />
@@ -73,6 +75,7 @@ function App() {
           </Route>
           <Route path="*" element={<PageNotFound />} />
         </Routes>
+        <ToastContainer position="top-right" autoClose={1500} />
       </LanguageContext.Provider>
     </div>
   );
