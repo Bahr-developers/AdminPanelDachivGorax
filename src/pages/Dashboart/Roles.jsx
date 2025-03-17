@@ -5,18 +5,24 @@ import toastify from "../../utils/toastify";
 import EditRoles from "../../Modal/EditRoles";
 import DeleteAllModal from "../../Modal/DeleteAllModal";
 import Loading from "../../Components/Loading/Loading";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { LanguageContext } from "../../Helper/LanguageContext";
 import { multiLanguageRoles } from "../../utils/multiLanguages";
 import { QUERY_KEYS, useRoles } from "../../Query";
 import { Helmet } from "react-helmet-async";
+import { IoIosArrowDown } from "react-icons/io";
 
 function Roles() {
   const queryClient = useQueryClient();
-
+  const [showPer, setShowPer] = useState({})
   // get roles
   const roles = useRoles();
-
+  const handleShowPermissions = (id, length) => {
+    setShowPer((prev) => ({
+      ...prev,
+      [id]: prev[id] === length ? 5 : length, // Agar bosilgan bo'lsa qisqartiradi
+    }));
+  };
   // delete roles
   const deletRoles = useMutation({
     mutationFn: rolesUtils.deleteRoles,
@@ -28,6 +34,8 @@ function Roles() {
       toastify.successMessage("Xatolik mavjud");
     },
   });
+
+
 
   // language Change
   const { languageChange } = useContext(LanguageContext);
@@ -58,33 +66,29 @@ function Roles() {
               </thead>
               <tbody>
                 {roles.data.map((el, i) => {
+                  const visibleCount = showPer[el.id] || 5;
                   return (
                     <tr key={el.id}>
                       <th scope="row">{i + 1}</th>
                       <td className="fw-medium fs-5">{el.name}</td>
                       <td>
                         <ol>
-                          {el.permissions.length &&
-                            el.permissions.map((e) => {
-                              return (
-                                <li
-                                  key={e.id}
-                                  className="fw-medium fs-5"
-                                >
-                                  {e.permission.name}
-                                </li>
-                              );
-                            })}
+                          {el.permissions.slice(0, visibleCount).map((e) => (
+                            <li key={e.id} className="fw-medium fs-5">
+                              {e.permission.name}
+                            </li>
+                          ))}
+
+                          {el.permissions.length > 5 && (
+                            <p
+                              role="button"
+                              className="text-blue-500 cursor-pointer"
+                              onClick={() => handleShowPermissions(el.id, el.permissions.length)}
+                            >
+                              {visibleCount === el.permissions.length ? "Hide Permissions" : "View All Permissions"} <IoIosArrowDown />
+                            </p>
+                          )}
                         </ol>
-                      </td>
-                      <td>
-                        <EditRoles role={el} />
-                      </td>
-                      <td>
-                        <DeleteAllModal
-                          deleteFunction={deletRoles.mutate}
-                          id={el.id}
-                        />
                       </td>
                     </tr>
                   );
