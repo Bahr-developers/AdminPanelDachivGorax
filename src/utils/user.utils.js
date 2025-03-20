@@ -24,7 +24,6 @@ export const userUtils = {
   },
   patchUser: async ({
     id,
-    email,
     image,
     name,
     password,
@@ -33,7 +32,6 @@ export const userUtils = {
     username,
   }) => {
     const formData = new FormData();
-    formData.append("email", email);
     formData.append("image", image);
     formData.append("name", name);
     formData.append("password", password);

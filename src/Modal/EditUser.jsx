@@ -17,7 +17,8 @@ function EditUser({ user }) {
     rolesChack: [...user?.roles],
     response: [...user?.roles],
   });
-
+  console.log(user);
+  
   const role = useRoles();
 
   const editUser = useMutation({
@@ -63,9 +64,8 @@ function EditUser({ user }) {
       name: e.target.name.value,
       username: e.target.username.value,
       password: e.target.password.value,
-      phone: e.target.phonenumber.value,
+      phone: e.target.phonenumber.value ? e.target.phonenumber.value:'',
       roles: perRoles.response,
-      email: e.target.email.value,
       image: file || "",
     });
   };
@@ -140,15 +140,6 @@ function EditUser({ user }) {
                     className="form-control"
                     name="phonenumber"
                     placeholder="97 123 45 68"
-                  />
-                </label>
-                <label className="d-block mb-2">
-                  <span>Email</span>
-                  <input
-                    type="email"
-                    className="form-control"
-                    name="email"
-                    placeholder="demo@email.com"
                   />
                 </label>
                 <div className="d-flex align-items-center gap-5 my-4">
