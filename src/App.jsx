@@ -4,7 +4,7 @@ import {
   Navigate,
 } from "react-router-dom";
 import { useState } from "react";
-import { LanguageContext } from "./Helper/LanguageContext";
+import { LanguageProvider } from "./Helper/LanguageContext";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -39,6 +39,7 @@ const getInitialLanguage = () => {
 };
 
 function App() {
+  if (!localStorage.getItem("language")) localStorage.setItem("language", "uz");
   const [languageChange, setLanguageChange] = useState(getInitialLanguage());
 
   const toggleLanguage = (value) => {
@@ -92,10 +93,10 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <LanguageContext.Provider value={{ languageChange, toggleLanguage }}>
+      <LanguageProvider>
         <RouterProvider router={router} />
         <ToastContainer position="top-right" autoClose={1500} />
-      </LanguageContext.Provider>
+      </LanguageProvider>
     </QueryClientProvider>
   );
 }

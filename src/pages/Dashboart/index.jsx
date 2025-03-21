@@ -49,7 +49,7 @@ function Dashboart() {
                   <select
                     name="language"
                     className="form-control fw-medium"
-                    onChange={toggleLanguage}
+                    onChange={(lang) => toggleLanguage(lang.target.value)}
                     value={languageChange}
                   >
                     {language.data?.length &&

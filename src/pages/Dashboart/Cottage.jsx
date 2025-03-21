@@ -32,7 +32,6 @@ function Cottage() {
 
   // language Change
   const { languageChange } = useContext(LanguageContext);
-  console.log(cottage);
   
   if (cottage.isLoading) return <Loading />;
 
