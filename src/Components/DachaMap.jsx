@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { GoogleMap, LoadScript, Autocomplete, Marker, Circle } from "@react-google-maps/api";
+import { GoogleMap, LoadScript, Autocomplete, Marker, Circle, useLoadScript } from "@react-google-maps/api";
 
 const libraries = ["places"]; // Static array qilib tashqarida yaratamiz
 
@@ -9,6 +9,14 @@ const defaultCenter = { lat: 41.2995, lng: 69.2401 };
 const DachaMap = ({ onLocationSelect }) => {
   const [coordinates, setCoordinates] = useState(defaultCenter);
   const autocompleteRef = useRef(null);
+
+  const { isLoaded, loadError } = useLoadScript({
+    googleMapsApiKey: "AIzaSyCOoxM7bD8Eg8G0lvGlE_xJOo1D5Yj5odY",
+    libraries,
+  });
+
+  if (loadError) return <p>Google Maps yuklanmadi!</p>;
+  if (!isLoaded) return <p>Yuklanmoqda...</p>;
 
   const onPlaceSelected = () => {
     if (autocompleteRef.current) {
