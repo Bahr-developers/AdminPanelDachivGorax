@@ -8,15 +8,15 @@ export const multilanguageLinks = [
     },
     to: "home",
   },
-  {
-    id: 2,
-    title: {
-      en: "Language",
-      ru: "Язык",
-      uz: "Tillar",
-    },
-    to: "language",
-  },
+  // {
+  //   id: 2,
+  //   title: {
+  //     en: "Language",
+  //     ru: "Язык",
+  //     uz: "Tillar",
+  //   },
+  //   to: "language",
+  // },
   {
     id: 3,
     title: {
@@ -27,14 +27,59 @@ export const multilanguageLinks = [
     to: "translate",
   },
   {
-    id: 4,
+    id: 8,
     title: {
-      en: "Region",
-      ru: "Область",
-      uz: "Viloyat",
+      en: "Announcements",
+      ru: "Объявления",
+      uz: "E'lonlar",
     },
-    to: "region",
+    to: "cottage",
   },
+  {
+    id: 15,
+    title: {
+      en: "Announcements in progress",
+      ru: "Объявления в процессе",
+      uz: "Jarayondagi e'lonlar",
+    },
+    to: "progress-cottages",
+  },
+  {
+    id: 14,
+    title: {
+      en: "Order",
+      ru: "Заказ",
+      uz: "Buyurtma",
+    },
+    to: "order",
+  },
+  {
+    id: 12,
+    title: {
+      en: "Services",
+      ru: "Услуги",
+      uz: "Xizmatlar",
+    },
+    to: "services",
+  },
+  {
+    id: 13,
+    title: {
+      en: "Tariff",
+      ru: "Тариф",
+      uz: "Tarif",
+    },
+    to: "tariff",
+  },
+  // {
+  //   id: 4,
+  //   title: {
+  //     en: "Region",
+  //     ru: "Область",
+  //     uz: "Viloyat",
+  //   },
+  //   to: "region",
+  // },
   {
     id: 5,
     title: {
@@ -62,33 +107,15 @@ export const multilanguageLinks = [
     },
     to: "comfort",
   },
-  {
-    id: 8,
-    title: {
-      en: "Announcements",
-      ru: "Объявления",
-      uz: "E'lonlar",
-    },
-    to: "cottage",
-  },
-  {
-    id: 15,
-    title: {
-      en: "Announcements in progress",
-      ru: "Объявления в процессе",
-      uz: "Jarayondagi e'lonlar",
-    },
-    to: "progress-cottages",
-  },
-  {
-    id: 9,
-    title: {
-      en: "Notification",
-      ru: "Уведомление",
-      uz: "Xabarnoma",
-    },
-    to: "notification",
-  },
+  // {
+  //   id: 9,
+  //   title: {
+  //     en: "Notification",
+  //     ru: "Уведомление",
+  //     uz: "Xabarnoma",
+  //   },
+  //   to: "notification",
+  // },
   {
     id: 10,
     title: {
@@ -106,33 +133,6 @@ export const multilanguageLinks = [
       uz: "Foydalanuvchilar",
     },
     to: "user",
-  },
-  {
-    id: 12,
-    title: {
-      en: "Services",
-      ru: "Услуги",
-      uz: "Xizmatlar",
-    },
-    to: "services",
-  },
-  {
-    id: 13,
-    title: {
-      en: "Tariff",
-      ru: "Тариф",
-      uz: "Tarif",
-    },
-    to: "tariff",
-  },
-  {
-    id: 14,
-    title: {
-      en: "Order",
-      ru: "Заказ",
-      uz: "Buyurtma",
-    },
-    to: "order",
   },
 ];
 
