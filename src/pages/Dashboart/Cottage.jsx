@@ -59,7 +59,7 @@ function Cottage() {
                 </tr>
               </thead>
               <tbody>
-                {cottage?.data.map((el, i) => {
+                {cottage?.data.filter((el) => el.cottageStatus ==='confirmed').map((el, i) => {
                   return (
                     <tr key={el.id} className="singil-cottage">
                       <th scope="row">{i + 1}</th>

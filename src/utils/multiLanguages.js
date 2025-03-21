@@ -65,11 +65,20 @@ export const multilanguageLinks = [
   {
     id: 8,
     title: {
-      en: "Cottage",
-      ru: "Коттедж",
-      uz: "Kottej",
+      en: "Announcements",
+      ru: "Объявления",
+      uz: "E'lonlar",
     },
     to: "cottage",
+  },
+  {
+    id: 15,
+    title: {
+      en: "Announcements in progress",
+      ru: "Объявления в процессе",
+      uz: "Jarayondagi e'lonlar",
+    },
+    to: "progress-cottages",
   },
   {
     id: 9,

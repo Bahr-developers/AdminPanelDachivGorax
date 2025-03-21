@@ -34,6 +34,7 @@ function Roles() {
       toastify.successMessage("Xatolik mavjud");
     },
   });
+console.log(roles);
 
 
 
@@ -53,7 +54,7 @@ function Roles() {
           <AddRoles />
         </div>
         <div className="language-inner">
-          {roles.data?.length ? (
+          {roles?.data?.length ? (
             <table className="table table-bordered">
               <thead>
                 <tr>
@@ -74,7 +75,7 @@ function Roles() {
                       <td>
                         <ol>
                           {el.permissions.slice(0, visibleCount).map((e) => (
-                            <li key={e.id} className="fw-medium fs-5">
+                            <li key={e.permission.id} className="fw-medium fs-5">
                               {e.permission.name}
                             </li>
                           ))}
