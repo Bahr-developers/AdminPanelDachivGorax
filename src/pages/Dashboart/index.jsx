@@ -16,7 +16,7 @@ import UserDropdown from "../../Components/UserDropdown";
 function Dashboart() {
   // get Language
   const language = useLanguage();
-  const { languageChange, toggleLanguage } = useContext(LanguageContext);
+  const { languageChange, toggleLanguage,cottages } = useContext(LanguageContext);
 
   return (
     <div>
@@ -33,8 +33,9 @@ function Dashboart() {
             <hr />
             <div className="link-wrap-dash">
               {multilanguageLinks.map((link) => (
-                <NavLink key={link.id} className="dash-link" to={link.to}>
+                <NavLink key={link.id} className={`dash-link d-flex justify-content-between align-items-center`} to={link.to}>
                   {link.title[languageChange]}
+                  {link.id == 15 && cottages?.length ? <p className="p-0 px-1 m-0 bg-warning rounded-pill">+{cottages?.length}</p>:''}
                 </NavLink>
               ))}
             </div>
