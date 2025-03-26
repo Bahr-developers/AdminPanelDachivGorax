@@ -116,15 +116,15 @@ export const multilanguageLinks = [
   //   },
   //   to: "notification",
   // },
-  // {
-  //   id: 10,
-  //   title: {
-  //     en: "Roles",
-  //     ru: "Роли",
-  //     uz: "Rollar",
-  //   },
-  //   to: "roles",
-  // },
+  {
+    id: 10,
+    title: {
+      en: "Roles",
+      ru: "Роли",
+      uz: "Rollar",
+    },
+    to: "roles",
+  },
   {
     id: 11,
     title: {

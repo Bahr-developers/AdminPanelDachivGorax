@@ -91,6 +91,15 @@ console.log(roles);
                           )}
                         </ol>
                       </td>
+                      <td className="fw-medium fs-5">
+                        <EditRoles role={el}/>
+                      </td>
+                      <td className="fw-medium fs-5">
+                        {/* <DeleteAllModal
+                          deleteFunction={deletRoles.mutate}
+                          id={el.id}
+                        /> */}
+                      </td>
                     </tr>
                   );
                 })}
