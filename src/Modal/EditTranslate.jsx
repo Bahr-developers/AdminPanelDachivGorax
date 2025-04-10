@@ -84,7 +84,7 @@ function EditTranslate(props) {
                       {" "}
                       {language?.code} definition
                     </span>
-                    <input
+                    <textarea
                       className="p-1 w-100 d-block form-control"
                       required
                       type="text"

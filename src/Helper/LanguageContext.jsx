@@ -7,7 +7,6 @@ export const LanguageProvider = ({ children }) => {
   const [languageChange, setLanguageChange] = useState("uz");
   const allCottages = useCottage()?.data
   const cottages = allCottages?.filter((el) => el.cottageStatus === 'progress')
-  console.log(cottages, 'provider');
   
   const toggleLanguage = (value) => {
     setLanguageChange(value);

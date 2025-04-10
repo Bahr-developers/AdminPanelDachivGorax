@@ -17,6 +17,7 @@ const UserDropdown = () => {
     localStorage.clear();
     setTimeout(() => {
       navigate("/");
+      window.location.reload()
     }, 1000);
   };
 

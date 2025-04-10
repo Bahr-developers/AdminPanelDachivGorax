@@ -95,10 +95,9 @@ function Translate() {
                     return (
                       <label key={e.id} className="w-100 d-block mb-2">
                         <span className="d-block w-100">
-                          {" "}
                           {e.code} definition
                         </span>
-                        <input
+                        <textarea
                           className="p-1 w-100 d-block form-control"
                           required
                           type="text"

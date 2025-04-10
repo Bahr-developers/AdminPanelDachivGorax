@@ -15,10 +15,10 @@ custimAxios.interceptors.response.use(
   (res) => res,
   (err) => {
     if (err?.response?.status == 406) {
-      // localStorage.clear()
+      localStorage.clear()
 
       authUtils.refreshAuth();
-      // window.location.reload();
+      window.location.reload();
     }
   }
 );

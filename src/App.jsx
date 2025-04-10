@@ -33,23 +33,11 @@ import ProgressCottages from "./pages/Dashboart/ProgressCattages";
 // React Query client
 const queryClient = new QueryClient();
 
-// Tilni boshqarish
-const getInitialLanguage = () => {
-  return localStorage.getItem("language") || "uz";
-};
 
 function App() {
   if (!localStorage.getItem("language")) localStorage.setItem("language", "uz");
-  const [languageChange, setLanguageChange] = useState(getInitialLanguage());
-
-  const toggleLanguage = (value) => {
-    localStorage.setItem("language", value);
-    setLanguageChange(value);
-    queryClient.invalidateQueries();
-  };
-
-  // Foydalanuvchi login qilganmi?
   const accessToken = localStorage.getItem("accessToken");
+
 
   // Marshrutlar (routes)
   const router = createBrowserRouter(
@@ -60,7 +48,7 @@ function App() {
       },
       {
         path: "/dashboart",
-        element: accessToken ? <Dashboard /> : <Navigate to="/" replace />,
+        element: accessToken ? <Dashboard /> : <Navigate to="/" replace/>,
         children: [
           { index: true, element: <Home /> },
           { path: "home", element: <Home /> },
