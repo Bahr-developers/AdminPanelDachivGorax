@@ -11,7 +11,7 @@ const DachaMap = ({ onLocationSelect }) => {
   const autocompleteRef = useRef(null);
 
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: "AIzaSyCOoxM7bD8Eg8G0lvGlE_xJOo1D5Yj5odY",
+    googleMapsApiKey: "AIzaSyCGUri0Qf7oabhI-5bCvkhu4DkNJU1l6v4",
     libraries,
   });
 
@@ -55,7 +55,7 @@ const DachaMap = ({ onLocationSelect }) => {
   };
 
   return (
-    <LoadScript googleMapsApiKey="AIzaSyCOoxM7bD8Eg8G0lvGlE_xJOo1D5Yj5odY" libraries={libraries}>
+    <LoadScript googleMapsApiKey="AIzaSyCGUri0Qf7oabhI-5bCvkhu4DkNJU1l6v4" libraries={libraries}>
       <div style={{ }}>
         <Autocomplete onLoad={(ref) => (autocompleteRef.current = ref)} onPlaceChanged={onPlaceSelected}>
           <input type="text" placeholder="Dacha joyini qidiring..." style={{ width: "100%", padding: "10px", fontSize: "16px", zIndex: 1051 }} />
