@@ -1,8 +1,13 @@
 import { useState, useRef } from "react";
-import { GoogleMap, LoadScript, Autocomplete, Marker, Circle, useLoadScript } from "@react-google-maps/api";
+import {
+  GoogleMap,
+  Autocomplete,
+  Marker,
+  Circle,
+  useLoadScript,
+} from "@react-google-maps/api";
 
-const libraries = ["places"]; // Static array qilib tashqarida yaratamiz
-
+const libraries = ["places"];
 const mapContainerStyle = { height: "300px", width: "100%" };
 const defaultCenter = { lat: 41.2995, lng: 69.2401 };
 
@@ -31,8 +36,6 @@ const DachaMap = ({ onLocationSelect }) => {
       } else {
         console.warn("No geometry data found for the selected place");
       }
-    } else {
-      console.warn("Autocomplete ref is not set properly");
     }
   };
 
@@ -55,14 +58,35 @@ const DachaMap = ({ onLocationSelect }) => {
   };
 
   return (
-    <LoadScript googleMapsApiKey="AIzaSyCGUri0Qf7oabhI-5bCvkhu4DkNJU1l6v4" libraries={libraries}>
-      <div style={{ }}>
-        <Autocomplete onLoad={(ref) => (autocompleteRef.current = ref)} onPlaceChanged={onPlaceSelected}>
-          <input type="text" placeholder="Dacha joyini qidiring..." style={{ width: "100%", padding: "10px", fontSize: "16px", zIndex: 1051 }} />
-        </Autocomplete>
-      </div>
+    <div>
+      <Autocomplete
+        onLoad={(ref) => (autocompleteRef.current = ref)}
+        onPlaceChanged={onPlaceSelected}
+      >
+        <input
+          type="text"
+          placeholder="Dacha joyini qidiring..."
+          style={{
+            width: "100%",
+            padding: "10px",
+            fontSize: "16px",
+            zIndex: 1051,
+          }}
+        />
+      </Autocomplete>
 
-      <button onClick={getCurrentLocation} type="button" style={{ margin: "10px", padding: "8px", background: "blue", color: "white", border: "none", cursor: "pointer" }}>
+      <button
+        onClick={getCurrentLocation}
+        type="button"
+        style={{
+          margin: "10px",
+          padding: "8px",
+          background: "blue",
+          color: "white",
+          border: "none",
+          cursor: "pointer",
+        }}
+      >
         📍 Mening joylashuvimni olish
       </button>
 
@@ -71,27 +95,33 @@ const DachaMap = ({ onLocationSelect }) => {
         center={coordinates}
         zoom={14}
         onClick={(e) => {
-          const newCoordinates = { lat: e.latLng.lat(), lng: e.latLng.lng() };
+          const newCoordinates = {
+            lat: e.latLng.lat(),
+            lng: e.latLng.lng(),
+          };
           setCoordinates(newCoordinates);
           onLocationSelect(newCoordinates);
         }}
       >
-        {coordinates && <Marker
+        <Marker
           position={coordinates}
           draggable={true}
           onDragEnd={(e) => {
-            const newCoordinates = { lat: e.latLng.lat(), lng: e.latLng.lng() };
+            const newCoordinates = {
+              lat: e.latLng.lat(),
+              lng: e.latLng.lng(),
+            };
             setCoordinates(newCoordinates);
             onLocationSelect(newCoordinates);
           }}
-        />}
+        />
         <Circle
           center={coordinates}
-          radius={50} // 50 metr radius
+          radius={50}
           options={{ fillColor: "red", strokeColor: "red" }}
         />
       </GoogleMap>
-    </LoadScript>
+    </div>
   );
 };
 

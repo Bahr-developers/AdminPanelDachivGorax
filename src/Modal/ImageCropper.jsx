@@ -100,7 +100,7 @@ const ImageCropper = ({ onImageCropped }) => {
                         image={imageSrc}
                         crop={crop}
                         zoom={zoom}
-                        aspect={16 / 7} // Faqat 16:9 formatda crop qilish
+                        aspect={16 / 7}
                         onCropChange={setCrop}
                         onZoomChange={setZoom}
                         onCropComplete={onCropComplete}

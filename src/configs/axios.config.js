@@ -13,14 +13,16 @@ custimAxios.defaults.headers.common[
 
 custimAxios.interceptors.response.use(
   (res) => res,
-  (err) => {
-    if (err?.response?.status == 406) {
-      localStorage.clear()
-
-      authUtils.refreshAuth();
-      window.location.reload();
+  async (err) => {
+    if (err?.response?.status === 406) {
+      try {
+        await authUtils.refreshAuth();
+        window.location.reload(); // Refresh muvaffaqiyatli bo'lsa qayta yuklash
+      } catch (refreshErr) {
+        console.error("Auth refresh failed:", refreshErr);
+      }
     }
+    return Promise.reject(err);
   }
-);
-
+)
 export default custimAxios;
