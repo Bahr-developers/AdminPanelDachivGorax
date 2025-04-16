@@ -9,17 +9,17 @@ import "./main.css";
 import DeleteAllModal from "../../Modal/DeleteAllModal";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import Loading from "../../Components/Loading/Loading";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { LanguageContext } from "../../Helper/LanguageContext";
 import { multiLanguageCottage } from "../../utils/multiLanguages";
 import { QUERY_KEYS, useCottage } from "../../Query";
 import { Helmet } from "react-helmet-async";
 
 function ProgressCottages() {
-    const queryClient = useQueryClient();
-
-    // get cottage
     const cottage = useCottage();
+    const queryClient = useQueryClient();
+    const [acivePage, setActivePage] = useState('progress')
+    
 
     // delete cottage
     const deletCottage = useMutation({
@@ -32,19 +32,21 @@ function ProgressCottages() {
 
     // language Change
     const { languageChange } = useContext(LanguageContext);
-    console.log(cottage);
-
     if (cottage.isLoading) return <Loading />;
 
     return (
         <>
             <Helmet>
-                <title>Admin Panel | Cottages</title>
+                <title>Admin Panel | Cottages Progress</title>
             </Helmet>
             <div className="cottage">
-                <div className="language-haed d-flex justify-content-between">
+                <div className="language-haed d-flex justify-content-between my-3">
                     <h2>{multiLanguageCottage.maintitle[languageChange]}</h2>
-                    <AddCottage />
+                    {/* <AddCottage /> */}
+                    <div className="d-flex">
+                        <button onClick={() => setActivePage('progress')} className="bg-warning text-white border-0 rounded-start px-3">Progress</button>
+                        <button onClick={() => setActivePage('rejected')} className="bg-danger text-white border-0 rounded-end px-3">Rejected</button>
+                    </div>
                 </div>
                 <div className="cottage-inner">
                     {cottage?.data?.filter(el => el.cottageStatus === 'progress')?.length ? (
@@ -59,7 +61,7 @@ function ProgressCottages() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {cottage?.data.filter(el => el.cottageStatus === 'progress').map((el, i) => {
+                                {acivePage == 'progress' ? cottage?.data.filter(el => el.cottageStatus === 'progress').map((el, i) => {
                                     return (
                                         <tr key={el.id} className="singil-cottage">
                                             <th scope="row">{i + 1}</th>
@@ -89,7 +91,7 @@ function ProgressCottages() {
                                                     className={
                                                         el.cottageStatus === "confirmed"
                                                             ? "p-2 rounded fw-bold bg-success text-white text-center"
-                                                            : "p-2 rounded fw-bold text-center bg-warning text-white"
+                                                            :  el.cottageStatus === "progress" ? "p-2 rounded fw-bold text-center bg-warning text-white" : "p-2 rounded fw-bold text-center bg-danger text-white"
                                                     }
                                                 >
                                                     {el.cottageStatus}
@@ -124,7 +126,75 @@ function ProgressCottages() {
                                             </td>
                                         </tr>
                                     );
-                                })}
+                                })
+                                :
+                                cottage?.data.filter(el => el.cottageStatus === 'rejected').map((el, i) => {
+                                    return (
+                                        <tr key={el.id} className="singil-cottage">
+                                            <th scope="row">{i + 1}</th>
+                                            <td>{el.name}</td>
+                                            <td className="position-relative p-1">
+                                                <LazyLoadImage
+                                                    src={`${IMG_BASE_URL}${el.images.find(el => el.isMainImage).image}`}
+                                                    className="rounded-3 "
+                                                    width={120}
+                                                    height={100}
+                                                    alt="img"
+                                                    effect="blur"
+                                                />
+                                                <EditCottageImage id={el.id} images={el.images} />
+                                            </td>
+                                            <td>
+                                                {el.cottageType?.map((e) => {
+                                                    return <p key={e.id}>{e.name}</p>;
+                                                })}
+                                            </td>
+                                            <td className="d-flex flex-column">
+                                                <p>{el.region.name}</p>
+                                                <p>{el.place.name} </p>
+                                            </td>
+                                            <td>
+                                                <p
+                                                    className={
+                                                        el.cottageStatus === "confirmed" 
+                                                            ? "p-2 rounded fw-bold bg-success text-white text-center" 
+                                                            : el.cottageStatus === "progress" ? "p-2 rounded fw-bold text-center bg-warning text-white" : "p-2 rounded fw-bold text-center bg-danger text-white"
+                                                    }
+                                                >
+                                                    {el.cottageStatus}
+                                                </p>
+                                            </td>
+                                            <th>
+                                                <p
+                                                    className={
+                                                        el.status === "active"
+                                                            ? "p-1 bg-success text-white rounded text-center"
+                                                            : "p-1 bg-danger text-white rounded"
+                                                    }
+                                                >
+                                                    {el.status}
+                                                </p>
+                                            </th>
+                                            {el?.cottageType[0]?.id !== '678811f1-d67c-42fa-a78c-f1d980df3397' ? <td>
+                                                <p>
+                                                    {el.price} sum
+                                                </p>
+                                                <p>
+                                                    {el.priceWeekend} sum(weekend)
+                                                </p>
+                                            </td> :
+                                                <td>Masjid</td>}
+                                            <td className="d-flex gap-2">
+                                                <EditCottage id={el.id} cottage={el} />
+                                                <DeleteAllModal
+                                                    deleteFunction={deletCottage.mutate}
+                                                    id={el.id}
+                                                />
+                                            </td>
+                                        </tr>
+                                    );
+                                })
+                                }
                             </tbody>
                         </table>
                     ) : (
