@@ -64,7 +64,7 @@ function EditUser({ user }) {
 			username: e.target.username.value,
 			password: e.target.password.value,
 			phone: e.target.phonenumber.value ? e.target.phonenumber.value : '',
-			roles: perRoles.response,
+			roles: [perRoles?.response[0]?.role?.id],
 			image: file || '',
 		})
 	}
@@ -183,9 +183,9 @@ function EditUser({ user }) {
 														name={e.id}
 														value={e.id}
 														onChange={handlRole}
-														defaultChecked={perRoles.rolesChack.some(el => {
-															el?.role?.name == e.name
-														})}
+														defaultChecked={perRoles.rolesChack.some(
+															el => el?.role?.id == e?.id
+														)}
 													/>
 													<span className='d-block fw-medium'>{e.name}</span>
 												</label>
