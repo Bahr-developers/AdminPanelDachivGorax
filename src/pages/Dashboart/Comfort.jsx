@@ -16,10 +16,8 @@ import { Helmet } from "react-helmet-async";
 
 function Comfort() {
   const queryClient = useQueryClient();
-
   // get Comforts
   const comforts = useComforts();
-
   // delete comforts
   const deletComfort = useMutation({
     mutationFn: comfortUtils.deleteComfort,
