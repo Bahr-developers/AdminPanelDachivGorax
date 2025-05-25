@@ -89,7 +89,6 @@ const DachaMap = ({ onLocationSelect }) => {
       >
         📍 Mening joylashuvimni olish
       </button>
-
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         center={coordinates}
