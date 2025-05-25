@@ -21,8 +21,7 @@ export const cottageTypeUtils = {
       name: name,
     });
     return data;
-  },
-  
+  },  
   editCottageTypeImg: async ({ id, image }) => {
     const formData = new FormData();
     formData.append("image", image);
