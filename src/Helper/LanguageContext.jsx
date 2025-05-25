@@ -13,7 +13,6 @@ export const LanguageProvider = ({ children }) => {
     localStorage.setItem("language", value);
   };
 
-
   return (
     <LanguageContext.Provider value={{ languageChange, toggleLanguage, cottages }}>
       {children}
