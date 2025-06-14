@@ -349,6 +349,14 @@ export const multiLanguageOrder = {
 			},
 		},
 		{
+			id: 10,
+			title: {
+				uz: 'Xizmat',
+				ru: 'Услуга',
+				en: 'Servise',
+			},
+		},
+		{
 			id: 5,
 			title: {
 				uz: 'Buyurtma holati',
